@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="贾磊的畅想">
 <meta property="og:description" content="前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下  产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导">
 <meta property="og:image" content="http://yoursite.com/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg">
-<meta property="og:updated_time" content="2017-05-22T05:53:06.000Z">
+<meta property="og:updated_time" content="2017-05-22T06:00:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解决切换controller后GrowingIO统计页面问题">
 <meta name="twitter:description" content="前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下  产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导">
@@ -53,6 +53,8 @@
 		<hgroup>
 		  <h1 class="header-author"><a href="/">贾磊</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">爱生活，爱编程，爱晔子</p>
 		
 
 		<nav class="header-menu">
@@ -111,6 +113,8 @@
 			<hgroup>
 			  <h1 class="header-author js-header-author">贾磊</h1>
 			</hgroup>
+			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>爱生活，爱编程，爱晔子<i class="icon icon-quo-right"></i></p>
 			
 			
 			
@@ -178,7 +182,7 @@
         <p>前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下</p>
 <p><img src="/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg" alt="首页"></p>
 <p>产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导致切换其他两个controller在growingIO统计到的都是最后一个发现controller.</p>
-<p>###如何切换当前childController<br>经查阅文档，iOS官方提供了切换subController的方法：</p>
+<h3 id="如何切换当前childController"><a href="#如何切换当前childController" class="headerlink" title="如何切换当前childController"></a>如何切换当前childController</h3><p>经查阅文档，iOS官方提供了切换subController的方法：</p>
 <pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion
 </code></pre><p>有了此方法，就可以在scrollView滑动页面切换页面停止滚动后对当前ChilidViewController进行切换，那么问题又来了：</p>
 <h3 id="如何检测scrollView停止了滑动？"><a href="#如何检测scrollView停止了滑动？" class="headerlink" title="如何检测scrollView停止了滑动？"></a>如何检测scrollView停止了滑动？</h3><p>很遗憾，iOS没有直接提供这样的API。 先看一下现有的几个方法是怎样的：</p>
@@ -187,8 +191,6 @@
 <li>(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;<br>这个方法表示手指离开了scrollview，第二个参数用于判断滚动速度是否慢慢下降。</li>
 </ul>
 </li>
-</ol>
-<ol>
 <li><ul>
 <li>(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt 这个方法看上去挺像我们要找的：停止减速。但是，从注释看，“嘎然而止”的时候才会被调用，很明显，我们要的是“自然停止”时被调的方法。</li>
 </ul>
@@ -302,20 +304,6 @@
 </article>
 
   
-<nav id="article-nav">
-  
-    <a href="/2017/05/22/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          Hello World
-        
-      </div>
-    </a>
-  
-  
-</nav>
-
 
 
 
@@ -460,41 +448,13 @@
     
     	<section class="tools-section tools-section-friends" q-show="friends">
   		
-        <ul class="search-ul">
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接1</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接2</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接3</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接4</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接5</a>
-            </li>
-          
-            <li class="search-li">
-              <a href="http://localhost:4000/" target="_blank" class="search-title"><i class="icon-quo-left icon"></i>友情链接6</a>
-            </li>
-          
-        </ul>
-  		
     	</section>
     
 
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">无证程序员&lt;br&gt;&lt;br&gt;资深足球小将</div>
   	  	
     	</section>
     
