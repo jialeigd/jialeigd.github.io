@@ -6,20 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>解决切换controller后GrowingIO统计页面问题 | 贾磊的猜想</title>
+  <title>机器学习历程 | 贾磊的猜想</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下  产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导">
+  <meta name="description" content="##1数学  线性代数：   线性代数大学教材和视频，深入理解几个基础而又重要的概念：子空间(Subspace)，正交(Orthogonality)，特征值和特征向量(Eigenvalues and eigenvectors)，和线性变换(Linear transform)。    资料：同济大学线性代数 Introduction to Linear Algebra (3rd Ed.)  by G">
 <meta property="og:type" content="article">
-<meta property="og:title" content="解决切换controller后GrowingIO统计页面问题">
-<meta property="og:url" content="http://yoursite.com/2017/05/21/first-article/index.html">
+<meta property="og:title" content="机器学习历程">
+<meta property="og:url" content="http://yoursite.com/2017/05/21/second-article/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
-<meta property="og:description" content="前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下  产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导">
-<meta property="og:image" content="http://yoursite.com/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg">
-<meta property="og:updated_time" content="2017-05-22T06:11:08.000Z">
+<meta property="og:description" content="##1数学  线性代数：   线性代数大学教材和视频，深入理解几个基础而又重要的概念：子空间(Subspace)，正交(Orthogonality)，特征值和特征向量(Eigenvalues and eigenvectors)，和线性变换(Linear transform)。    资料：同济大学线性代数 Introduction to Linear Algebra (3rd Ed.)  by G">
+<meta property="og:updated_time" content="2017-06-23T15:43:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="解决切换controller后GrowingIO统计页面问题">
-<meta name="twitter:description" content="前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下  产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导">
-<meta name="twitter:image" content="http://yoursite.com/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg">
+<meta name="twitter:title" content="机器学习历程">
+<meta name="twitter:description" content="##1数学  线性代数：   线性代数大学教材和视频，深入理解几个基础而又重要的概念：子空间(Subspace)，正交(Orthogonality)，特征值和特征向量(Eigenvalues and eigenvectors)，和线性变换(Linear transform)。    资料：同济大学线性代数 Introduction to Linear Algebra (3rd Ed.)  by G">
   
     <link rel="alternative" href="/atom.xml" title="贾磊的猜想" type="application/atom+xml">
   
@@ -159,19 +157,19 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-first-article" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-second-article" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      解决切换controller后GrowingIO统计页面问题
+      机器学习历程
     </h1>
   
 
         
-        <a href="/2017/05/21/first-article/" class="archive-article-date">
+        <a href="/2017/05/21/second-article/" class="archive-article-date">
   	<time datetime="2017-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-21</time>
 </a>
         
@@ -179,43 +177,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下</p>
-<p><img src="/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg" alt="首页"></p>
-<p>产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导致切换其他两个controller在growingIO统计到的都是最后一个发现controller.</p>
-<h3 id="如何切换当前childController"><a href="#如何切换当前childController" class="headerlink" title="如何切换当前childController"></a>如何切换当前childController</h3><p>经查阅文档，iOS官方提供了切换subController的方法：</p>
-<pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion
-</code></pre><blockquote>
-<p>Transitions between two of the view controller’s child view controllers.<br>This method adds the second view controller’s view to the view hierarchy and then performs the animations defined in your animations block. After the animation completes, it removes the first view controller’s view from the view hierarchy.<br>This method is only intended to be called by an implementation of a custom container view controller. If you override this method, you must call super in your implementation.在两个子视图控制器中转换该方法，执行完以后，fromViewController指代的视图控制器的View将从界面消失；toViewController所指代的视图控制器的View将被载入到页面中</p>
+        <p>##1数学</p>
+<ul>
+<li><p>线性代数：</p>
+<p>  线性代数大学教材和视频，深入理解几个基础而又重要的概念：子空间(Subspace)，正交(Orthogonality)，特征值和特征向量(Eigenvalues and eigenvectors)，和线性变换(Linear transform)。</p>
+</li>
+</ul>
+<blockquote>
+<p>资料：同济大学线性代数</p>
+<p>Introduction to Linear Algebra (3rd Ed.)  by Gilbert Strang.</p>
 </blockquote>
-<p>有了此方法，就可以在scrollView滑动页面切换页面停止滚动后对当前ChilidViewController进行切换，那么问题又来了：</p>
-<h3 id="如何检测scrollView停止了滑动？"><a href="#如何检测scrollView停止了滑动？" class="headerlink" title="如何检测scrollView停止了滑动？"></a>如何检测scrollView停止了滑动？</h3><p>很遗憾，iOS没有直接提供这样的API。 先看一下现有的几个方法是怎样的：</p>
-<ol>
-<li><ul>
-<li>(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;<br>这个方法表示手指离开了scrollview，第二个参数用于判断滚动速度是否慢慢下降。</li>
+<ul>
+<li>概率论与数理统计</li>
 </ul>
-</li>
-<li><ul>
-<li>(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt 这个方法看上去挺像我们要找的：停止减速。但是，从注释看，“嘎然而止”的时候才会被调用，很明显，我们要的是“自然停止”时被调的方法。</li>
-</ul>
-</li>
-<li><ul>
-<li>(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView; // called when setContentOffset scrollRectVisible:animated: finishes. not called if not animating 这个是指scrollview停止滚动动画，嗯，这下是我们想要的了吧！<br>抱歉，不是！！！ 试验一下就会发现，无论怎么滚动怎么停止，这个方法都不会被调！除非用代码的方式调用了setContentOffset scrollRectVisible:animated: finishes，但是，我们手指触发试图滚动是不会调该方法的……</li>
-</ul>
-</li>
-</ol>
-<p>研究了一通，一无所获啊，先打局德州冷静下，就在一局结束之时，突然灵光乍现， 苹果并没有提供直接的方法判断scrollView自然停止，只能搞点奇巧淫技来解决了，想起之前用到的一个系统方法：</p>
-<pre><code>+ (void)cancelPreviousPerformRequestsWithTarget:(id)aTarget selector:(SEL)aSelector object:(id)anArgument
-</code></pre><blockquote>
-<p>All perform requests are canceled that have the same target as aTarget, argument as anArgument, and selector as aSelector. This method removes perform requests only in the current run loop, not all run loops.停止当前runloop下之前要执行的selector。</p>
-</blockquote>
-<p>有了此方法，就可以在- (void)scrollViewDidScroll:(UIScrollView *)scrollView最后不断通过- (void)performSelector:(SEL)aSelector withObject:(nullable id)anArgument afterDelay:(NSTimeInterval)delay;去延迟执行一个自己编写的scrollView停止方法，如果执行到此方法说明滚动停止，但是要在performSelector之前调用cancelPreviousPerformRequestsWithTarget去停止此方法，这就达到了如果滚动没有停止就通过cancelPreviousPerformRequestsWithTarget去取消停止方法的执行，如果滚动停止了，那么scrollViewDidScroll不再执行，本次的cancelPreviousPerformRequestsWithTarget也不执行，就无法取消上次的performSelector去执行真正的停止方法，达到了监测scrollView自然停止滚动的效果，代码如下：</p>
-<pre><code>- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-   //检查scrollView是否停止
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelector:@selector(scrollViewDidEndScroll:) withObject:nil afterDelay:0.3];
-}
-</code></pre><p>以上就是通过监测scrollView停止滚动后来切换parentVC的childVC来判断当前所选择的viewController</p>
 
       
 
@@ -295,7 +269,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/21/first-article/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/21/second-article/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -309,11 +283,15 @@
   
 <nav id="article-nav">
   
-  
-    <a href="/2017/05/21/second-article/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">机器学习历程</div>
-      <i class="icon-circle-right"></i>
+    <a href="/2017/05/21/first-article/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          解决切换controller后GrowingIO统计页面问题
+        
+      </div>
     </a>
+  
   
 </nav>
 
