@@ -6,12 +6,12 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>贾磊的猜想</title>
+  <title>Archives: 2017/7 | 贾磊的猜想</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="记录编程的每一点">
 <meta property="og:type" content="website">
 <meta property="og:title" content="贾磊的猜想">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="http://yoursite.com/archives/2017/07/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
 <meta property="og:description" content="记录编程的每一点">
 <meta name="twitter:card" content="summary">
@@ -158,284 +158,47 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-third-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/24/third-article/">机器学习之算法--决策树算法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/07/24/third-article/" class="archive-article-date">
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/07/24/third-article/" class="archive-article-date">
   	<time datetime="2017-07-24T04:46:28.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>##一        引言<br>机器学习是近些年兴起的一门交叉学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。在计算机系统中，“经验”通常已“数据”的形式存在，因此，机器学习研究的主要内容，是关于在计算机上从数据中产生“模型”的算法。如果说计算机科学是研究关于“算法”的学问，那么类似，可以说机器学习室研究关于“学习算法”的学问。</p>
-<p>##二    机器学习算法分类</p>
-<blockquote>
-<p>###1. 根据学习方式分类：</p>
-<blockquote>
-<p>监督学习：</p>
-<p>在监督式学习下，输入数据被称为“训练数据”，每组训练数据有一个明确的标识或结果，如对防垃圾邮件系统中“垃圾邮件”“非垃圾邮件”，对手写数字识别中的“1“，”2“，”3“，”4“等。在建立预测模型的时候，监督式学习建立一个学习过程，将预测结果与“训练数据”的实际结果进行比较，不断的调整预测模型，直到模型的预测结果达到一个预期的准确率。监督式学习的常见应用场景如分类问题和回归问题。常见算法有逻辑回归（Logistic Regression）和反向传递神经网络（Back Propagation Neural Network）</p>
-<p>非监督学习：</p>
-<p>在非监督式学习中，数据并不被特别标识，学习模型是为了推断出数据的一些内在结构。常见的应用场景包括关联以及聚类等。常见算法包括Apriori算法以及k-Means算法。</p>
-<p>半监督式学习:</p>
-<p>在此学习方式下，输入数据部分被标识，部分没有被标识，这种学习模型可以用来进行预测，但是模型首先需要学习数据的内在结构以便合理的组织数据来进行预测。应用场景包括分类和回归，算法包括一些对常用监督式学习算法的延伸，这些算法首先试图对未标识数据进行建模，在此基础上再对标识的数据进行预测。如图论推理算法（Graph Inference）或者拉普拉斯支持向量机（Laplacian SVM.）等。</p>
-<p>强化学习:</p>
-<p>在这种学习模式下，输入数据作为对模型的反馈，不像监督模型那样，输入数据仅仅是作为一个检查模型对错的方式，在强化学习下，输入数据直接反馈到模型，模型必须对此立刻作出调整。常见的应用场景包括动态系统以及机器人控制等。常见算法包括Q-Learning以及时间差学习（Temporal difference learning）。 </p>
-<p>　　在企业数据应用的场景下， 人们最常用的可能就是监督式学习和非监督式学习的模型。 在图像识别等领域，由于存在大量的非标识的数据和少量的可标识数据， 目前半监督式学习是一个很热的话题。 而强化学习更多的应用在机器人控制及其他需要进行系统控制的领域</p>
-</blockquote>
-<p>###2.    根据算法功能分类：</p>
-<blockquote>
-<p>分类算法：</p>
-<p>常用的分类算法包括：决策树算法，朴素贝叶斯，支持向量机，Logistic回归等</p>
-<p>回归算法：</p>
-<p>常用的回归算法包括：普通最小二乘回归（OLSR），线性回归，逻辑回归，逐步回归，多元自适应回归样条法（MARS),局部估计平滑散点图（LOESS）， 最近邻算法</p>
-<p>聚类：</p>
-<p>聚类是一种无监督学习任务，该算法基于数据的内部结构寻找观察样本的自然族群（即集群）</p>
-<p>常用的聚类算法：     K 均值聚类（k-means）, Affinity Propagation 聚类,层次聚类（Hierarchical / Agglomerative）, EM算法，分层聚类算法</p>
-<p>关联：</p>
-<p>关联规则学习在数据不同变量之间观察到一些关联，算法要做的就是找到这些关联中最能描述的规则，也就是获取一个时间和其他事件之间的依赖和关联的知识。</p>
-<p>常用的关联规则算法有：Apriori算法，Eclat算法</p>
-<p>深度学习算法：</p>
-<p>常用的深度学习算法包括：深度波尔兹曼机（DBM），深度信念网络（DBN），卷积神经网络（CNN），栈式自编码算法（Stacked Auto-Encoder）</p>
-</blockquote>
-</blockquote>
-<p>##三 决策树算法：</p>
-<blockquote>
-<p>###1. 概述</p>
-<blockquote>
-<p> 决策树（decision tree）是一个树结构（可以是二叉树或非二叉树）。其每个非叶节点表示一个特征属性上的测试，每个分支代表这个特征属性在某个值域上的输出，而每个叶节点存放一个类别。使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果</p>
-</blockquote>
-<p>###2. 决策树的构造</p>
-<p>&gt;</p>
-</blockquote>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/07/24/third-article/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-    <article id="post-second-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+        </div>
+    	 
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/20/second-article/">机器学习历程</a>
+      <a class="archive-article-title" href="/2017/07/24/third-article/">机器学习之算法--决策树算法</a>
     </h1>
   
 
-        
-        <a href="/2017/06/20/second-article/" class="archive-article-date">
-  	<time datetime="2017-06-19T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-数学"><a href="#1-数学" class="headerlink" title="1 数学"></a>1 数学</h2><ul>
-<li><p>线性代数：（10天）</p>
-<p>  线性代数大学教材和视频，深入理解几个基础而又重要的概念：子空间(Subspace)，正交(Orthogonality)，特征值和特征向量(Eigenvalues and eigenvectors)，和线性变换(Linear transform)。</p>
-</li>
-</ul>
-<blockquote>
-<p>资料：</p>
-<p>同济大学线性代数 ：（现代基础）(行列式和矩阵计算为主)（5天）</p>
-<p>Introduction to Linear Algebra (3rd Ed.)  by Gilbert Strang. （5天）</p>
-</blockquote>
-<ul>
-<li><p>概率论与数理统计（45天）（一小时）</p>
-<p>  概率论与数理统计基础知识，掌握机器学习相关的经典数理统计方法，熟悉Linear regression(线性回归)，factor analysis（因子分析），principal component analysis（主成分分析），canonical component analysis（典型相关分析），马尔可夫概率分布，之后就可以进一步深入学习贝叶斯统计和Graphical models。</p>
-</li>
-</ul>
-<blockquote>
-<p>资料<br>浙江大学概率论与数理统计第四版加视频（基础知识）（30天）<br>Introduction to Graphical Models (draft version).  by M. Jordan and C. Bishop.(贝叶斯概率) （参考）<br>计量经济学导论(回归分析及应用) （15天）</p>
-</blockquote>
-<ul>
-<li>其他数学相关<br>  当然研究机器学习不止需要上述数学知识，例如分析学(Analysis)，拓扑 (Topology)都有可能用到，这些知识可以用到的时候再去研究</li>
-</ul>
-<h2 id="2-算法"><a href="#2-算法" class="headerlink" title="2 算法"></a>2 算法</h2><ul>
-<li><p>机器学习（45天）（每天一小时）</p>
-<p>  有许多经典算法，当然掌握这些算法前先要熟悉计算机常用数据结构和基础算法，例如树，图的简历和遍历，之后在深入到机器学习几大重要算法决策树（Decision Trees），朴素贝叶斯分类(Naive Bayesian classification)，逻辑回归(Logistic Regression)， 支持向量机（Support Vector Machine，SVM），线性回归，最近邻算法——KNN，等等</p>
-</li>
-</ul>
-<blockquote>
-<p>资料<br><a href="http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/（算法比较）" target="_blank" rel="external">http://www.csuldw.com/2016/02/26/2016-02-26-choosing-a-machine-learning-classifier/（算法比较）</a></p>
-<p>清华大学数据结构（熟悉树和图数据结构）（15天）</p>
-<p>机器学习 周志华 （30天）持续学习和Python的学习穿插进行，使用python完成一些模型。</p>
-</blockquote>
-<ul>
-<li><p>神经网络(30天)</p>
-<p> 神经网络是机器学习的核心，主要有CNN(卷积神经网络)、RNN(循环神经网络)、DNN(深度神经网络)</p>
-</li>
-</ul>
-<blockquote>
-<p>资料<br><a href="http://deeplearning.net/tutorial/" target="_blank" rel="external">http://deeplearning.net/tutorial/</a></p>
-<p>神经⽹络与深度学习（30天）</p>
-<p>Deep Convolutional Network</p>
-<p><a href="http://open.163.com/special/opencourse/machinelearning.html(斯坦福公开课" target="_blank" rel="external">http://open.163.com/special/opencourse/machinelearning.html(斯坦福公开课</a> 吴恩达)</p>
-</blockquote>
-<h2 id="3-编程语言"><a href="#3-编程语言" class="headerlink" title="3  编程语言"></a>3  编程语言</h2><ul>
-<li><p>Python（15天）</p>
-<p>  对于有编程经验的同学，找本Python经典书籍快速浏览，主要在使用中进行熟悉。当然其他编程语言依然可以实现机器学习，但对于语言的学习都是大同小异吧</p>
-</li>
-</ul>
-<blockquote>
-<p>资料</p>
-<p>Learning Python, 5th Edition</p>
-</blockquote>
-<h2 id="4-构建工具"><a href="#4-构建工具" class="headerlink" title="4 构建工具"></a>4 构建工具</h2><ul>
-<li><p>tensorFlow (30天)（每天2小时）</p>
-<p>  可以使用TensorFlow进行建模和机器训练</p>
-<blockquote>
-<p>资料<br><a href="http://www.tensorfly.cn/tfdoc/tutorials/overview.html" target="_blank" rel="external">http://www.tensorfly.cn/tfdoc/tutorials/overview.html</a> </p>
-</blockquote>
-</li>
-</ul>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/20/second-article/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-
-
-
-
   
-    <article id="post-first-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+  
+    </div></section>
+  
+
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/05/21/first-article/">解决切换controller后GrowingIO统计页面问题</a>
-    </h1>
-  
-
-        
-        <a href="/2017/05/21/first-article/" class="archive-article-date">
-  	<time datetime="2017-05-20T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下</p>
-<p><img src="/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg" alt="首页"></p>
-<p>产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导致切换其他两个controller在growingIO统计到的都是最后一个发现controller.</p>
-<h3 id="如何切换当前childController"><a href="#如何切换当前childController" class="headerlink" title="如何切换当前childController"></a>如何切换当前childController</h3><p>经查阅文档，iOS官方提供了切换subController的方法：</p>
-<pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion
-</code></pre><blockquote>
-<p>Transitions between two of the view controller’s child view controllers.<br>This method adds the second view controller’s view to the view hierarchy and then performs the animations defined in your animations block. After the animation completes, it removes the first view controller’s view from the view hierarchy.<br>This method is only intended to be called by an implementation of a custom container view controller. If you override this method, you must call super in your implementation.在两个子视图控制器中转换该方法，执行完以后，fromViewController指代的视图控制器的View将从界面消失；toViewController所指代的视图控制器的View将被载入到页面中</p>
-</blockquote>
-<p>有了此方法，就可以在scrollView滑动页面切换页面停止滚动后对当前ChilidViewController进行切换，那么问题又来了：</p>
-<h3 id="如何检测scrollView停止了滑动？"><a href="#如何检测scrollView停止了滑动？" class="headerlink" title="如何检测scrollView停止了滑动？"></a>如何检测scrollView停止了滑动？</h3><p>很遗憾，iOS没有直接提供这样的API。 先看一下现有的几个方法是怎样的：</p>
-<ol>
-<li><ul>
-<li>(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;<br>这个方法表示手指离开了scrollview，第二个参数用于判断滚动速度是否慢慢下降。</li>
-</ul>
-</li>
-<li><ul>
-<li>(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt 这个方法看上去挺像我们要找的：停止减速。但是，从注释看，“嘎然而止”的时候才会被调用，很明显，我们要的是“自然停止”时被调的方法。</li>
-</ul>
-</li>
-<li><ul>
-<li>(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView; // called when setContentOffset scrollRectVisible:animated: finishes. not called if not animating 这个是指scrollview停止滚动动画，嗯，这下是我们想要的了吧！<br>抱歉，不是！！！ 试验一下就会发现，无论怎么滚动怎么停止，这个方法都不会被调！除非用代码的方式调用了setContentOffset scrollRectVisible:animated: finishes，但是，我们手指触发试图滚动是不会调该方法的……</li>
-</ul>
-</li>
-</ol>
-<p>研究了一通，一无所获啊，先打局德州冷静下，就在一局结束之时，突然灵光乍现， 苹果并没有提供直接的方法判断scrollView自然停止，只能搞点奇巧淫技来解决了，想起之前用到的一个系统方法：</p>
-<pre><code>+ (void)cancelPreviousPerformRequestsWithTarget:(id)aTarget selector:(SEL)aSelector object:(id)anArgument
-</code></pre><blockquote>
-<p>All perform requests are canceled that have the same target as aTarget, argument as anArgument, and selector as aSelector. This method removes perform requests only in the current run loop, not all run loops.停止当前runloop下之前要执行的selector。</p>
-</blockquote>
-<p>有了此方法，就可以在- (void)scrollViewDidScroll:(UIScrollView *)scrollView最后不断通过- (void)performSelector:(SEL)aSelector withObject:(nullable id)anArgument afterDelay:(NSTimeInterval)delay;去延迟执行一个自己编写的scrollView停止方法，如果执行到此方法说明滚动停止，但是要在performSelector之前调用cancelPreviousPerformRequestsWithTarget去停止此方法，这就达到了如果滚动没有停止就通过cancelPreviousPerformRequestsWithTarget去取消停止方法的执行，如果滚动停止了，那么scrollViewDidScroll不再执行，本次的cancelPreviousPerformRequestsWithTarget也不执行，就无法取消上次的performSelector去执行真正的停止方法，达到了监测scrollView自然停止滚动的效果，代码如下：</p>
-<pre><code>- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-   //检查scrollView是否停止
-    [NSObject cancelPreviousPerformRequestsWithTarget:self];
-    [self performSelector:@selector(scrollViewDidEndScroll:) withObject:nil afterDelay:0.3];
-}
-</code></pre><p>以上就是通过监测scrollView停止滚动后来切换parentVC的childVC来判断当前所选择的viewController</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/05/21/first-article/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-  
-  
 
 
           </div>
@@ -457,9 +220,9 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
-		isArchive: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
