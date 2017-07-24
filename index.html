@@ -265,6 +265,29 @@
 <pre><code>l(Xi) = -logjCx,)
 </code></pre><p>为了计算熵，我们需要计算所有类别所有可能值包含的信息期望值，通过下面的公式得到:</p>
 <pre><code>H =-^&apos;^P^!^2P(Xi)
+</code></pre><ul>
+<li><p>python实现计算给定数据集的熵</p>
+<p>  from math import log</p>
+</li>
+</ul>
+<p>def calcShannonEnt(dataSet):</p>
+<pre><code>numEntries = len(dataSet)
+labelCounts = {}
+
+for featVec in dataSet:
+    currentLabel = featVec[-1]
+    if currentLabel not in labelCounts.keys():
+        labelCounts[currentLabel] = 0
+
+    labelCounts[currentLabel] += 1
+
+shannonEnt = 0.0
+
+for key in labelCounts:
+    prob = float (labelCounts [key] )/numEntries
+    shannonEnt -= prob * log(prob,2)
+
+return shannonEnt
 </code></pre>
       
 

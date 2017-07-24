@@ -14,7 +14,7 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/24/third-article/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
 <meta property="og:description" content="一 引言机器学习是近些年兴起的一门交叉学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。在计算机系统中，“经验”通常已“数据”的形式存在，因此，机器学习研究的主要内容，是关于在计算机上从数据中产生“模型”的算法。如果说计算机科学是研究关于“算法”的学问，那么类似，可以说机器学习室研究关于“学习算法”的学问。 二 机器学习算法分类1. 根据学习方式分类： 监督学习：   在监督式学">
-<meta property="og:updated_time" content="2017-07-24T10:44:18.000Z">
+<meta property="og:updated_time" content="2017-07-24T10:51:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法之(一)--决策树">
 <meta name="twitter:description" content="一 引言机器学习是近些年兴起的一门交叉学科，它致力于研究如何通过计算的手段，利用经验来改善系统自身的性能。在计算机系统中，“经验”通常已“数据”的形式存在，因此，机器学习研究的主要内容，是关于在计算机上从数据中产生“模型”的算法。如果说计算机科学是研究关于“算法”的学问，那么类似，可以说机器学习室研究关于“学习算法”的学问。 二 机器学习算法分类1. 根据学习方式分类： 监督学习：   在监督式学">
@@ -264,6 +264,29 @@
 <pre><code>l(Xi) = -logjCx,)
 </code></pre><p>为了计算熵，我们需要计算所有类别所有可能值包含的信息期望值，通过下面的公式得到:</p>
 <pre><code>H =-^&apos;^P^!^2P(Xi)
+</code></pre><ul>
+<li><p>python实现计算给定数据集的熵</p>
+<p>  from math import log</p>
+</li>
+</ul>
+<p>def calcShannonEnt(dataSet):</p>
+<pre><code>numEntries = len(dataSet)
+labelCounts = {}
+
+for featVec in dataSet:
+    currentLabel = featVec[-1]
+    if currentLabel not in labelCounts.keys():
+        labelCounts[currentLabel] = 0
+
+    labelCounts[currentLabel] += 1
+
+shannonEnt = 0.0
+
+for key in labelCounts:
+    prob = float (labelCounts [key] )/numEntries
+    shannonEnt -= prob * log(prob,2)
+
+return shannonEnt
 </code></pre>
       
 
