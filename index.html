@@ -267,30 +267,21 @@
 <pre><code>H =-^&apos;^P^!^2P(Xi)
 </code></pre><ul>
 <li><p>python实现计算给定数据集的熵</p>
-<pre><code>from math import log
+<p>  from math import log</p>
+<p>  def calcShannonEnt(dataSet):</p>
+<p>  numEntries = len(dataSet)<br>  labelCounts = {}</p>
+<p>  for featVec in dataSet:</p>
+<pre><code>currentLabel = featVec[-1]
+if currentLabel not in labelCounts.keys():
+    labelCounts[currentLabel] = 0
 
-def calcShannonEnt(dataSet):
-
-numEntries = len(dataSet)
-
-labelCounts = {}
-
-for featVec in dataSet:
-
-  currentLabel = featVec[-1]
-
-    if currentLabel not in labelCounts.keys():
-            labelCounts[currentLabel] = 0
-    labelCounts[currentLabel] += 1
-
-    shannonEnt = 0.0
-
-for key in labelCounts:
-      prob = float (labelCounts [key] )/numEntries
-    shannonEnt -= prob * log(prob,2)
-
-return shannonEnt
-</code></pre></li>
+labelCounts[currentLabel] += 1
+</code></pre><p>  shannonEnt = 0.0</p>
+<p>  for key in labelCounts:</p>
+<pre><code>prob = float (labelCounts [key] )/numEntries
+shannonEnt -= prob * log(prob,2)
+</code></pre><p>  return shannonEnt</p>
+</li>
 </ul>
 
       
