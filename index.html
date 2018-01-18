@@ -514,25 +514,20 @@
         <p>前几日产品经理查看GrowingIO数据时发现了我们应用首页的一个问题，页面如下</p>
 <p><img src="/Users/leijia/workspace/jialeigd/source/_posts/homepage.jpeg" alt="首页"></p>
 <p>产品首页上部分为三个tab，分别对应精选，关注，发现三个controller，每个controller以addChildViewController的方式加入到首页controller中. 但是问题来了，最后add到parentController的ChildController会覆盖前两个controller，导致切换其他两个controller在growingIO统计到的都是最后一个发现controller.</p>
-<h3 id="如何切换当前childController"><a href="#如何切换当前childController" class="headerlink" title="如何切换当前childController"></a>如何切换当前childController</h3><p>经查阅文档，iOS官方提供了切换subController的方法：</p>
+<h3 id="1-如何切换当前childController"><a href="#1-如何切换当前childController" class="headerlink" title="1. 如何切换当前childController"></a>1. 如何切换当前childController</h3><p>经查阅文档，iOS官方提供了切换subController的方法：</p>
 <pre><code>- (void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion
 </code></pre><blockquote>
 <p>Transitions between two of the view controller’s child view controllers.<br>This method adds the second view controller’s view to the view hierarchy and then performs the animations defined in your animations block. After the animation completes, it removes the first view controller’s view from the view hierarchy.<br>This method is only intended to be called by an implementation of a custom container view controller. If you override this method, you must call super in your implementation.在两个子视图控制器中转换该方法，执行完以后，fromViewController指代的视图控制器的View将从界面消失；toViewController所指代的视图控制器的View将被载入到页面中</p>
 </blockquote>
 <p>有了此方法，就可以在scrollView滑动页面切换页面停止滚动后对当前ChilidViewController进行切换，那么问题又来了：</p>
-<h3 id="如何检测scrollView停止了滑动？"><a href="#如何检测scrollView停止了滑动？" class="headerlink" title="如何检测scrollView停止了滑动？"></a>如何检测scrollView停止了滑动？</h3><p>很遗憾，iOS没有直接提供这样的API。 先看一下现有的几个方法是怎样的：</p>
+<h3 id="2-如何检测scrollView停止了滑动？"><a href="#2-如何检测scrollView停止了滑动？" class="headerlink" title="2.如何检测scrollView停止了滑动？"></a>2.如何检测scrollView停止了滑动？</h3><p>很遗憾，iOS没有直接提供这样的API。 先看一下现有的几个方法是怎样的：</p>
 <ol>
-<li><ul>
-<li>(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;<br>这个方法表示手指离开了scrollview，第二个参数用于判断滚动速度是否慢慢下降。</li>
-</ul>
+<li><p>(void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate;</p>
+<p>这个方法表示手指离开了scrollview，第二个参数用于判断滚动速度是否慢慢下降。</p>
 </li>
-<li><ul>
-<li>(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt 这个方法看上去挺像我们要找的：停止减速。但是，从注释看，“嘎然而止”的时候才会被调用，很明显，我们要的是“自然停止”时被调的方法。</li>
-</ul>
+<li><p>(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView;      // called when scroll view grinds to a halt 这个方法看上去挺像我们要找的：停止减速。但是，从注释看，“嘎然而止”的时候才会被调用，很明显，我们要的是“自然停止”时被调的方法。</p>
 </li>
-<li><ul>
-<li>(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView; // called when setContentOffset scrollRectVisible:animated: finishes. not called if not animating 这个是指scrollview停止滚动动画，嗯，这下是我们想要的了吧！<br>抱歉，不是！！！ 试验一下就会发现，无论怎么滚动怎么停止，这个方法都不会被调！除非用代码的方式调用了setContentOffset scrollRectVisible:animated: finishes，但是，我们手指触发试图滚动是不会调该方法的……</li>
-</ul>
+<li><p>(void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView; // called when setContentOffset scrollRectVisible:animated: finishes. not called if not animating 这个是指scrollview停止滚动动画，嗯，这下是我们想要的了吧！抱歉，不是！！！ 试验一下就会发现，无论怎么滚动怎么停止，这个方法都不会被调！除非用代码的方式调用了setContentOffset scrollRectVisible:animated: finishes，但是，我们手指触发试图滚动是不会调该方法的……</p>
 </li>
 </ol>
 <p>研究了一通，一无所获啊，先打局德州冷静下，就在一局结束之时，突然灵光乍现， 苹果并没有提供直接的方法判断scrollView自然停止，只能搞点奇巧淫技来解决了，想起之前用到的一个系统方法：</p>
@@ -548,6 +543,15 @@
     [self performSelector:@selector(scrollViewDidEndScroll:) withObject:nil afterDelay:0.3];
 }
 </code></pre><p>以上就是通过监测scrollView停止滚动后来切换parentVC的childVC来判断当前所选择的viewController</p>
+<hr>
+<p>2018-1-18 更新</p>
+<p><code>(void)transitionFromViewController:(UIViewController *)fromViewController toViewController:(UIViewController *)toViewController duration:(NSTimeInterval)duration options:(UIViewAnimationOptions)options animations:(void (^ __nullable)(void))animations completion:(void (^ __nullable)(BOOL finished))completion</code></p>
+<p>通过此方法切换controller生命周期会导致subView消失的问题，必须再手动addSubview才可以让子view显示。经过调研发现了以下方法</p>
+<p><code>// If a custom container controller manually forwards its appearance callbacks, then rather than calling viewWillAppear:, viewDidAppear: viewWillDisappear:, or viewDidDisappear: on the children these methods should be used instead. This will ensure that descendent child controllers appearance methods will be invoked. It also enables more complex custom transitions to be implemented since the appearance callbacks are</code></p>
+<p><code>// now tied to the final matching invocation of endAppearanceTransition.</code></p>
+<p><code>\- (void)beginAppearanceTransition:(BOOL)isAppearing animated:(BOOL)animated __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);</code></p>
+<p><code>\- (void)endAppearanceTransition __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);</code></p>
+<p>可以在(void)scrollViewDidEndScroll:(UIScrollView*)scrollView方法中，通过beginAppearanceTransition 开启controller的生命周期，endAppearanceTransition() 方法来结束生命周期。达到切换不同controller生命周期的目的。</p>
 
       
 
