@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>使用TensorFlow实现卷积神经网络 | 贾磊的猜想</title>
+  <title>机器学习算法之（三）—基于概率论的分类方法：朴素贝叶斯 | 贾磊的猜想</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##">
+  <meta name="description" content="####一  基于贝叶斯决策理论的分类方法 1 概述 优点：在数据少的情况下依然有效，可以处理多类别问题 缺点：对于输入数据的准备方式较为敏感 使用数据类型：标称型数据  ​        朴素贝叶斯是贝叶斯决策理论的一部分，所以讲述朴素负叶斯之前有必要快速了解一下贝叶斯决策理论。假设现在我们有一个数据集，它由两类数据组成，假设有位读者找到了描述图中两类数据的统计参数。我们使用p1(x,y)表示数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用TensorFlow实现卷积神经网络">
+<meta property="og:title" content="机器学习算法之（三）—基于概率论的分类方法：朴素贝叶斯">
 <meta property="og:url" content="http://yoursite.com/2017/10/08/fifth-article/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
-<meta property="og:description" content="##">
-<meta property="og:updated_time" content="2017-10-08T01:50:56.000Z">
+<meta property="og:description" content="####一  基于贝叶斯决策理论的分类方法 1 概述 优点：在数据少的情况下依然有效，可以处理多类别问题 缺点：对于输入数据的准备方式较为敏感 使用数据类型：标称型数据  ​        朴素贝叶斯是贝叶斯决策理论的一部分，所以讲述朴素负叶斯之前有必要快速了解一下贝叶斯决策理论。假设现在我们有一个数据集，它由两类数据组成，假设有位读者找到了描述图中两类数据的统计参数。我们使用p1(x,y)表示数">
+<meta property="og:updated_time" content="2018-01-31T16:17:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="使用TensorFlow实现卷积神经网络">
-<meta name="twitter:description" content="##">
+<meta name="twitter:title" content="机器学习算法之（三）—基于概率论的分类方法：朴素贝叶斯">
+<meta name="twitter:description" content="####一  基于贝叶斯决策理论的分类方法 1 概述 优点：在数据少的情况下依然有效，可以处理多类别问题 缺点：对于输入数据的准备方式较为敏感 使用数据类型：标称型数据  ​        朴素贝叶斯是贝叶斯决策理论的一部分，所以讲述朴素负叶斯之前有必要快速了解一下贝叶斯决策理论。假设现在我们有一个数据集，它由两类数据组成，假设有位读者找到了描述图中两类数据的统计参数。我们使用p1(x,y)表示数">
   
     <link rel="alternative" href="/atom.xml" title="贾磊的猜想" type="application/atom+xml">
   
@@ -164,7 +164,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      使用TensorFlow实现卷积神经网络
+      机器学习算法之（三）—基于概率论的分类方法：朴素贝叶斯
     </h1>
   
 
@@ -177,7 +177,78 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##</p>
+        <p>####一  基于贝叶斯决策理论的分类方法</p>
+<h5 id="1-概述"><a href="#1-概述" class="headerlink" title="1 概述"></a>1 概述</h5><ul>
+<li>优点：在数据少的情况下依然有效，可以处理多类别问题</li>
+<li>缺点：对于输入数据的准备方式较为敏感</li>
+<li>使用数据类型：标称型数据</li>
+</ul>
+<p>​        朴素贝叶斯是贝叶斯决策理论的一部分，所以讲述朴素负叶斯之前有必要快速了解一下贝叶斯决策理论。假设现在我们有一个数据集，它由两类数据组成，假设有位读者找到了描述图中两类数据的统计参数。我们使用p1(x,y)表示数据点（x,y）属于1的概率，p2(x,y)表示属于类别2的概率，那么对于一个新数据点(x,y)，可以用下面的规则来判断它的类别:</p>
+<p>​    如果p1(x,y) &gt; p2(x,y) 那么类别为1</p>
+<p>​    如果p1(x,y) &lt; p2(x,y) 那么类别为2</p>
+<p>​    也就是说，我们会选择高概率对应的类别。这就是贝叶斯决策理论的核心思想，即选择具有最高概率的决策。如果整个数据集使用6个浮点数来表示，并且计算类别概率的Python代码只有两行，那么你更倾向于那种方法来对该数据点进行分类？</p>
+<ol>
+<li><p>使用knn，进行1000次距离计算</p>
+</li>
+<li><p>使用决策树，分别沿着x轴，y轴划分数据集</p>
+</li>
+<li><p>计算数据点属于每个类别的概率，并进行比较</p>
+<p>使用决策树不会非常成功, 而和简单的概率计算相比, kNN 的计算量太大。因此，对于上述问题，最佳选择是使用刚才提到的概率比较方法。    </p>
+</li>
+</ol>
+<h5 id="2-使用条件概率来进行分类"><a href="#2-使用条件概率来进行分类" class="headerlink" title="2 使用条件概率来进行分类"></a>2 使用条件概率来进行分类</h5><p>​    上节提到的两个概率，P1和P2：</p>
+<p>​    如果p1(x,y) &gt; p2(x,y) 那么类别为1</p>
+<p>​    如果p1(x,y) &lt; p2(x,y) 那么类别为2</p>
+<p>​    但这两个准则并不是贝叶斯决策理论的所有内容。使用P1和P2只是尽可能的简化描述，而真正需要计算和比较的是P(c1|x, y)和P(c2 | x, y)。这些符号所代表的具体意义是:给定某个由x,y表示的数据点，那么该数据点来自类别c1,c2的概率分别是多少? 具体地，应用贝叶斯准则得到：<br>$$<br>p(ci |x, y) = p(x,y|ci)p(ci) / p(x, y)<br>$$</p>
+<h4 id="二-使用朴素贝叶斯对文档进行分类"><a href="#二-使用朴素贝叶斯对文档进行分类" class="headerlink" title="二 使用朴素贝叶斯对文档进行分类"></a>二 使用朴素贝叶斯对文档进行分类</h4><p>​    机器学习的一个重要应用就是文档的自动分类。在文档分类中，整个文档(如一封电子邮件)是实例，而电子邮件中的某些元素则构成特征。虽然电子邮件是一种会不断增加的文本，但我们同样也可以对新闻报道、用户留言、政府公文等其他任意类型的文本进行分类。我们可以观察文档中出现的词，并把每个词的出现或者不出现作为一个特征，这样得到的特征数目就会跟词汇表中的词目一样多。朴素贝叶斯是上节介绍的贝叶斯分类器的一个扩展，是用于文档分类的常用算法。</p>
+<h5 id="朴素贝叶斯的一般过程："><a href="#朴素贝叶斯的一般过程：" class="headerlink" title="朴素贝叶斯的一般过程："></a>朴素贝叶斯的一般过程：</h5><ol>
+<li>数据收集:可以使用任何方法。本章使用RSS源。    </li>
+<li>准备数据:需要数值型或者布尔型数据。</li>
+<li>分析数据:有大量特征时，绘制特征作用不大，此时使用直方图效果更好。<ol>
+<li>算法:计算不同的独立特征的条件概率。                                    <ol>
+<li>测试算法:计算错误率。    </li>
+</ol>
+</li>
+</ol>
+</li>
+<li>使用算法: 一个常见的朴素贝叶斯应用是文档分类。可以在任意的分类场景中使用朴</li>
+<li><p>素贝叶斯命类器，不一定非要是文本</p>
+<p>​        </p>
+<p>​假设词汇表中有1000个单词。要得到好的概率分布，就需要足够的数据样本，假定样本数为N。由统计学知，如果每个特征需要N个样本，那么对于10个特征将需要N^10个样本，对于包含1000个特征的词汇表将需要个样本。如果特征之间相互独立，那么样本数就可以从N^1000减少到1000 * N.所谓独立是指统计意义上的独立，即一个特征或者单词出现的可能性与它和其他单词相邻没有关系，朴素贝叶斯的另一个假设是，每个特征同等重要。<br>其实这个假设也有问题。如果要判断留言板的留言是否得当，那么可能不需要看完所有的1000个单词，而只需要看10~20个特征就足以做出判断了。尽管上述假设存在一些小的瑕 疵 ，但朴素贝叶斯的实际效果却很好。    </p>
+</li>
+</ol>
+<p>​    </p>
+<h4 id="三-使用Python进行文本分类"><a href="#三-使用Python进行文本分类" class="headerlink" title="三 使用Python进行文本分类"></a>三 使用Python进行文本分类</h4><p>​    要从文本中获取特征，需要先拆分文本。具体如何做呢，这里的特征是来自文本的词条(token), 一个词条是字符的任意组合。可以把词条想象为单词，也可以使用非单词词条，如URL，IP地址或者任意其他字符串。然后将每一个文本片段表示为一个词条向量，其中值为1表示词条出现在文档中，0表示词条未出现。</p>
+<h5 id="1-准备数据-从文本中构建词向量"><a href="#1-准备数据-从文本中构建词向量" class="headerlink" title="1 准备数据:从文本中构建词向量"></a>1 准备数据:从文本中构建词向量</h5><p>​    我们将把文本看成单词向量或者词条向量，也就是说将句子转换为向量。考虑出现在所有文档中的所有单词，再决定将哪些词纳人词汇表或者说所要的词汇集合，然后必须要将每一篇文档转换为词汇表上的向量。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line">def loadDataSet():</div><div class="line">    postingList = [[&apos;my&apos;, &apos;dog&apos;, &apos;has&apos;, &apos;flea&apos;, &apos;problems&apos;, &apos;help&apos;, &apos;please&apos;],</div><div class="line">                  [&apos;maybe&apos;, &apos;not&apos;, &apos;take&apos;, &apos;him&apos;, &apos;to1&apos;, &apos;dog&apos;, &apos;park&apos;, &apos;stupid&apos;],</div><div class="line">                  [&apos;my&apos;, &apos;dalmation&apos;, &apos;is&apos;, &apos;so&apos;, &apos;cute&apos;, &apos;my&apos;, &apos;love&apos;, &apos;him&apos;],</div><div class="line">                  [&apos;stop&apos;, &apos;posting&apos;, &apos;stupid&apos;, &apos;worthless&apos;, &apos;garbage&apos;],</div><div class="line">                  [&apos;mr&apos;, &apos;licks&apos;, &apos;ate&apos;, &apos;my&apos;, &apos;steak&apos;, &apos;how&apos;,&apos;to&apos;, &apos;stop&apos;, &apos;him&apos;]</div><div class="line">                  [&apos;quit&apos;, &apos;buying&apos;, &apos;worthless&apos;, &apos;dog&apos; &apos;food&apos;, &apos;stupid&apos;]]</div><div class="line"></div><div class="line">    classVec = [0, 1, 0, 1, 0, 1]</div><div class="line"></div><div class="line">    return postinglist, class_vec</div><div class="line"></div><div class="line"></div><div class="line">def create_vocablist(dataSet):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    创建一个包含在所有文档中出现的不重复词的列表</div><div class="line">    :param dataSet: </div><div class="line">    :return: </div><div class="line">    &apos;&apos;&apos;</div><div class="line">    vocab_set = set([])</div><div class="line">    for document in dataSet:</div><div class="line">        vocab_set = vocab_set | set(document)</div><div class="line"></div><div class="line">    return list(vocab_set)</div><div class="line"></div><div class="line">def set_of_words_to_vec(vocab_list, input_set):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    检查input_set 文档向量，如果出现了vocab_list 中的单词，将input_set 对应元素置为1.</div><div class="line">    :param vocab_list:      词汇表</div><div class="line">    :param input_set:       输入的检查词汇集合</div><div class="line">    :return:    标志位文档向量</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    return_vec = [0] * len(vocab_list)</div><div class="line">    for word in input_set:</div><div class="line">        if word in vocab_list:</div><div class="line">            return_vec[vocab_list.index(word)] = 1</div><div class="line">        else:</div><div class="line">            print (&quot;the word :%s is not in my Vocabulary&quot; % word)</div><div class="line"></div><div class="line">    return return_vec</div></pre></td></tr></table></figure>
+<p>​        </p>
+<h5 id="2-训练算法：从词向量计算概率"><a href="#2-训练算法：从词向量计算概率" class="headerlink" title="2 训练算法：从词向量计算概率"></a>2 训练算法：从词向量计算概率</h5><p>​    前面介绍了如何将一组单词转换为一组数字，接下来看看如何使用这些数字计算概率。现在已经知道一个词是否出现在一篇文档中，也知道该文档所属的类别。我们重写贝叶斯准则。w表示这是一个向量，即他有多个数值组成。在这个例子中，数值个数与词汇表中的词个数相同<br>$$<br>p (Ci| w) = p (w | Ci) * p(Ci) / p(w)<br>$$<br>​    我们将使用上述公式，对每个类计算该值，然后比较这两个概率值的大小。如何计算呢首先可以通过类别I(侮辱性留言或非侮辱性留言)中文档数除以总的文档数来计算概率P(Ci),接下来要计算p(w | Ci), 这里就要用到朴素贝叶斯假设。如果将p(w | Ci)展开为一个个独立特征，那么就可以将上述概率写作p(W0, W1… Wn | Ci)。</p>
+<p>该函数的伪代码如下:</p>
+<blockquote>
+<p>计算每个类别中的文档数目:</p>
+<p>对每篇训练文档:</p>
+<p>​    对每个类别:</p>
+<p>​        如果词条出现文档中―增加该词条的计数值</p>
+<p>​        增加所有词条的计数值</p>
+<p>​    对每个类别:</p>
+<p>​        对每个词条:</p>
+<p>​            将该词条的数目除以总词条数目得到条件概率</p>
+<p>​    返回每个类别的条件概率    </p>
+</blockquote>
+<p>我们利用下面的代码来实现上述伪码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">def train_bayes(train_matrix, traion_category):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    </div><div class="line">    :param train_matrix:    文档矩阵</div><div class="line">    :param traion_category: 每篇文档类别标签所构成的向量</div><div class="line">    :return: plVect（侮辱性词向量概率分布）plVect（文明性词向量概率分布）</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    num_train_doc = len(train_matrix)</div><div class="line">    num_words = len(train_matrix[0])</div><div class="line"></div><div class="line">    p_abusive = np.sum(traion_category) / float(num_train_doc)</div><div class="line">    p0_number = np.zeros(num_words)</div><div class="line">    p1_number = np.zeros(num_words)</div><div class="line">    p0_denom = 0.0</div><div class="line">    p1_denom = 0.0</div><div class="line"></div><div class="line">    for i in range(num_train_doc):</div><div class="line">        # 计算侮辱性词的权重和总数</div><div class="line">        if traion_category[i] == 1:</div><div class="line">            p1_number += train_matrix[i]</div><div class="line">            p1_denom += np.sum(train_matrix[i])</div><div class="line">        # 计算侮辱性词的权重和总数</div><div class="line">        else:</div><div class="line">            p0_number += train_matrix[i]</div><div class="line">            p0_denom += np.sum(train_matrix[i])</div><div class="line"></div><div class="line">    plVect = p1_number / p1_denom</div><div class="line">    p0Vect = p0_number / p0_denom</div><div class="line">    </div><div class="line">    return p0Vect, plVect, p_abusive</div></pre></td></tr></table></figure>
+<p>​<br>下面利用以上方法来计算侮辱性文档的概率和两个类别的概率</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">if __name__ == &apos;__main__&apos;:</div><div class="line">    list_posts, list_classes = reader.loadDataSet()</div><div class="line">    my_vocab_list = reader.create_vocablist(list_posts)</div><div class="line"></div><div class="line">    print (&apos;word list is %s&apos; % my_vocab_list)</div><div class="line"></div><div class="line">    train_matrix = []</div><div class="line">    for post_in_doc in list_posts:</div><div class="line">        train_matrix.append(reader.set_of_words_to_vec(my_vocab_list, post_in_doc))</div><div class="line"></div><div class="line">    p0_vec, p1_vec, p_ab = train_bayes(train_matrix, list_classes)</div><div class="line"></div><div class="line">    print (&apos;文明词概率 %s, \n侮辱词概率 %s&apos; % (p0_vec, p1_vec))</div><div class="line"></div><div class="line">    most_civilization_index = np.argmax(p0_vec)</div><div class="line">    most_not_civilization_index = np.argmax(p1_vec)</div><div class="line"></div><div class="line">    most_civilization = my_vocab_list[most_civilization_index]</div><div class="line">    most_not_civilization = my_vocab_list[most_not_civilization_index]</div><div class="line"></div><div class="line">    print (&apos;最文明词 %s, 最侮辱词 %s&apos; % (most_civilization, most_not_civilization))</div></pre></td></tr></table></figure>
+<h5 id="3-测试算法-根据现实情况修改分类器"><a href="#3-测试算法-根据现实情况修改分类器" class="headerlink" title="3 测试算法:根据现实情况修改分类器"></a>3 测试算法:根据现实情况修改分类器</h5><p>​<br>​<br>​            </p>
+<p>​<br>​<br>​    </p>
+<p>​<br>​<br>​<br>​<br>​    </p>
+<p>​<br>​<br>​    </p>
+<p>​<br>​<br>​    </p>
+<p>​<br>​<br>​    </p>
+<p>​<br>​<br>​                </p>
+<p>​<br>​    </p>
+<p>​<br>​<br>​    </p>
+<p>​<br>​<br>​    </p>
 
       
 
