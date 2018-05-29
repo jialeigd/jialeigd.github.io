@@ -14,12 +14,12 @@
 <meta property="og:url" content="http://yoursite.com/2017/07/24/third-article/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
 <meta property="og:description" content="一 . 概述决策树（decision tree）是一个树结构（可以是二叉树或非二叉树）。其每个非叶节点表示一个特征属性上的测试，每个分支代表这个特征属性在某个值域上的输出，而每个叶节点存放一个类别。使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果。 决策树很多任务都 是为了数据中所蕴含的知识信息，因此">
-<meta property="og:image" content="http://yoursite.com/2017/07/24/third-article/third-article-image/CodeCogsEqn3_1.png">
+<meta property="og:image" content="http://yoursite.com/2017/07/24/third-article/CodeCogsEqn3_1.png">
 <meta property="og:updated_time" content="2018-01-18T14:04:04.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法之(一)--决策树">
 <meta name="twitter:description" content="一 . 概述决策树（decision tree）是一个树结构（可以是二叉树或非二叉树）。其每个非叶节点表示一个特征属性上的测试，每个分支代表这个特征属性在某个值域上的输出，而每个叶节点存放一个类别。使用决策树进行决策的过程就是从根节点开始，测试待分类项中相应的特征属性，并按照其值选择输出分支，直到到达叶子节点，将叶子节点存放的类别作为决策结果。 决策树很多任务都 是为了数据中所蕴含的知识信息，因此">
-<meta name="twitter:image" content="http://yoursite.com/2017/07/24/third-article/third-article-image/CodeCogsEqn3_1.png">
+<meta name="twitter:image" content="http://yoursite.com/2017/07/24/third-article/CodeCogsEqn3_1.png">
   
     <link rel="alternative" href="/atom.xml" title="贾磊的猜想" type="application/atom+xml">
   
@@ -200,7 +200,7 @@
 <p>​    熵定义为信息的期望值，在明晰这个概念之前，我们必须知道信息的定义。如果待分类的事 务可能划分在多个分类之中’ 则符号^的信息定义为</p>
 <p>$$<br>l(Xi) = -log2p(Xi)<br>$$</p>
 <p>其中p(Xi) 是 选择了该分类的概率，为了计算熵，我们需要计算所有类别所有可能值包含的信息期望值，通过下面的公式得到:</p>
-<p><img src="./third-article-image/CodeCogsEqn3_1.png" alt=""></p>
+<p><img src="/2017/07/24/third-article/CodeCogsEqn3_1.png" alt=""></p>
 <p>python实现计算给定数据集的熵:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">from math import log</div><div class="line"></div><div class="line">def calcShannonEnt(dataSet):</div><div class="line"></div><div class="line">    numEntries = len(dataSet)</div><div class="line">    labelCounts = &#123;&#125;</div><div class="line"></div><div class="line">    for featVec in dataSet:</div><div class="line">        currentLabel = featVec[-1]</div><div class="line">        if currentLabel not in labelCounts.keys():</div><div class="line">            labelCounts[currentLabel] = 0</div><div class="line">            labelCounts[currentLabel] += 1</div><div class="line"></div><div class="line">    shannonEnt = 0.0</div><div class="line">    for key in labelCounts:</div><div class="line">        prob = float (labelCounts [key] ) / numEntries</div><div class="line">        shannonEnt -= prob * log(prob,2)</div><div class="line">        </div><div class="line">    return shannonEnt</div></pre></td></tr></table></figure>
 <p>​    首先,计算数据集中实例的总数。我们也可以在需要时再计算这个值，但是由于代码中多次用到这个值，为了提高代码效率，我们显式地声明一个变量保存实例总数。然后，创建一个数据字典，它的键值是最后一列的数值0 。如果当前键值不存在，则扩展字典并将当前键值加入字典。每个键值都记录了当前类别出现的次数。最 后 ，使用所有类标签的发生频率计算类别出现的概率。我们将用这个概率计算香农熵，统计所有类标签发生的次数。下面我们看看如何使用熵划分数据集。</p>

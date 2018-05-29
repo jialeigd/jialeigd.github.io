@@ -6,18 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>机器学习算法之(二)-k-means聚类算法 | 贾磊的猜想</title>
+  <title>Archives: 2018 | 贾磊的猜想</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 概述1.1 概念​    聚类是一种无监督的学习，它将相似的对象归到同一个簇中。它有点像全自动分类。聚类 方法几乎可以应用于所有对象，簇内的对象越相似，聚类的效果越好。下面介绍一种称为K-均值（k-means）聚类的算法。之所以称之为k-均值是因为它可以发现个k不同的簇，且每个簇的中心采用簇中所含值的均值计算而成。 1.2 簇识别：​    簇识别给出聚类结果的含义。假定有一些数据，现在将一">
-<meta property="og:type" content="article">
-<meta property="og:title" content="机器学习算法之(二)-k-means聚类算法">
-<meta property="og:url" content="http://yoursite.com/2017/07/24/fourth-article/index.html">
+  <meta name="description" content="记录编程的每一点">
+<meta property="og:type" content="website">
+<meta property="og:title" content="贾磊的猜想">
+<meta property="og:url" content="http://yoursite.com/archives/2018/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
-<meta property="og:description" content="1. 概述1.1 概念​    聚类是一种无监督的学习，它将相似的对象归到同一个簇中。它有点像全自动分类。聚类 方法几乎可以应用于所有对象，簇内的对象越相似，聚类的效果越好。下面介绍一种称为K-均值（k-means）聚类的算法。之所以称之为k-均值是因为它可以发现个k不同的簇，且每个簇的中心采用簇中所含值的均值计算而成。 1.2 簇识别：​    簇识别给出聚类结果的含义。假定有一些数据，现在将一">
-<meta property="og:updated_time" content="2018-01-24T03:53:32.000Z">
+<meta property="og:description" content="记录编程的每一点">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="机器学习算法之(二)-k-means聚类算法">
-<meta name="twitter:description" content="1. 概述1.1 概念​    聚类是一种无监督的学习，它将相似的对象归到同一个簇中。它有点像全自动分类。聚类 方法几乎可以应用于所有对象，簇内的对象越相似，聚类的效果越好。下面介绍一种称为K-均值（k-means）聚类的算法。之所以称之为k-均值是因为它可以发现个k不同的簇，且每个簇的中心采用簇中所含值的均值计算而成。 1.2 簇识别：​    簇识别给出聚类结果的含义。假定有一些数据，现在将一">
+<meta name="twitter:title" content="贾磊的猜想">
+<meta name="twitter:description" content="记录编程的每一点">
   
     <link rel="alternative" href="/atom.xml" title="贾磊的猜想" type="application/atom+xml">
   
@@ -157,181 +156,76 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-fourth-article" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      机器学习算法之(二)-k-means聚类算法
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/05/27/seventh-article/" class="archive-article-date">
+  	<time datetime="2018-05-27T09:07:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-27</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/05/27/seventh-article/">小程序webview传递Cookie引发的 Cookie的session的思考</a>
     </h1>
   
 
-        
-        <a href="/2017/07/24/fourth-article/" class="archive-article-date">
-  	<time datetime="2017-07-24T13:21:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-24</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><h5 id="1-1-概念"><a href="#1-1-概念" class="headerlink" title="1.1 概念"></a>1.1 概念</h5><p>​    聚类是一种无监督的学习，它将相似的对象归到同一个簇中。它有点像全自动分类。聚类 方法几乎可以应用于所有对象，簇内的对象越相似，聚类的效果越好。下面介绍一种称为K-均值（k-means）聚类的算法。之所以称之为k-均值是因为它可以发现个k不同的簇，且每个簇的中心采用簇中所含值的均值计算而成。</p>
-<h5 id="1-2-簇识别："><a href="#1-2-簇识别：" class="headerlink" title="1.2 簇识别："></a>1.2 簇识别：</h5><p>​    簇识别给出聚类结果的含义。假定有一些数据，现在将一些相似数据归到一起，簇识别会告诉我们这些簇到底都是些什么。聚类与分类的最大不同在于，分类的目标事先巳知，而聚类则不一样。因为其产生的结果与分类相同，而只是类别没有预先定义，聚类有时也被称为无监督分类(unsupervised classification )。聚类分析试图将相似对象归人同一簇，将不相似对象归到不同簇。相似这一概念取决于所选 择的相似度计算方法。</p>
-<h3 id="2-K-均值聚类算法"><a href="#2-K-均值聚类算法" class="headerlink" title="2. K-均值聚类算法"></a>2. K-均值聚类算法</h3><blockquote>
-<p>优点:容易实现。</p>
-<p>缺点:可能收敛到局部最小值，在大规模数据集上收敛较慢。</p>
-<p>适用数据类型:数值型数据。</p>
-</blockquote>
-<h5 id="2-1-K-均值聚类的流程"><a href="#2-1-K-均值聚类的流程" class="headerlink" title="2.1 K-均值聚类的流程"></a>2.1 K-均值聚类的流程</h5><p>​    K均值是发现给定数据集的K个簇的算法。簇个数K是用户给定的，每一个簇通过其质心 ( centroid) , 即簇中所有点的中心来描述。</p>
-<p>​    K-均值算法的工作流程是这样的。首先，随机确定k个初始点作为质心。然后将数据集中的每个点分配到一个簇中，具体来讲，为每个点找距其最近的质心，并将其分配给该质心所对应的簇。这一步完成之后，每个簇的质心更新为该簇所有点的平均值。上 面 提 到“最近”质心的说法，意味着需要进行某种距离计算。读者可以使用所喜欢的任意距离度量方法。数据集上K-均值算法的性能会受到所选距离计算方法的影响。下面给出K-均值算法的代码实现。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line">import numpy</div><div class="line"></div><div class="line">def distEclud(vecA, vecB):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    计算两个向量的欧氏距离</div><div class="line">    :param vecA: </div><div class="line">    :param vecB: </div><div class="line">    :return: </div><div class="line">    &apos;&apos;&apos;</div><div class="line">    return np.sqrt(np.sum(np.power(vecA - vecB, 2)))</div><div class="line"></div><div class="line">def randCent(dataSet, k):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    给定数据集构建一个包含k个随机质心的集合。</div><div class="line">    随机质心必须要在整个数据集的边界之内，</div><div class="line">    这可以通过找到数据集每一维的最小和最大值来完成。</div><div class="line">    然 后生成0到1.0之间的随机数并通过取值范围和最小值，以便确保随机点在数据的边界之内</div><div class="line">    :param dataSet:  数据集</div><div class="line">    :param k:   初始质心数量</div><div class="line">    :return: </div><div class="line">    &apos;&apos;&apos;</div><div class="line">    shape = np.shape(dataSet)</div><div class="line">    n = np.shape(dataSet)[1]</div><div class="line">    centroids = np.mat(np.zeros((k,n)))</div><div class="line"></div><div class="line">    for j in range (n) :</div><div class="line">        minJ = min(dataSet[:,j])</div><div class="line">        rangeJ = float(max(dataSet[:,j]) - minJ)</div><div class="line">        centroids[:,j] = minJ + rangeJ * np.random.rand(k, 1)</div><div class="line"></div><div class="line">    return centroids</div></pre></td></tr></table></figure>
-<p>迭代计算质心：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">def kMeans(dataSet, k, distMeas=distEclud, createCent=randCent):</div><div class="line">    mean = np.shape(dataSet)[0]</div><div class="line">    clusterAssment = np.mat(np.zeros((mean,2)))</div><div class="line">    centroids = createCent(dataSet, k)</div><div class="line">    clusterChanged = True</div><div class="line">    while clusterChanged:</div><div class="line">        clusterChanged = False</div><div class="line">        for i in range(mean):</div><div class="line">            minDist = np.inf</div><div class="line">            minIndex = -1</div><div class="line">            for j in range(k):</div><div class="line">                distJI = distMeas(centroids[j], dataSet[i])</div><div class="line">                if distJI &lt; minDist:</div><div class="line">                    minDist = distJI</div><div class="line">                    minIndex = j</div><div class="line"></div><div class="line">            if clusterAssment[i, 0] != minIndex:</div><div class="line">                clusterChanged = True</div><div class="line"></div><div class="line">            clusterAssment[i, :] = minIndex, minDist**2</div><div class="line"></div><div class="line">        # print(centroids)</div><div class="line"></div><div class="line">        for cent in range(k):</div><div class="line">            ptsinClust = dataSet[np.nonzero(clusterAssment[:,0].A == cent)[0]]</div><div class="line">            centroids[cent,:] = np.mean(ptsinClust, axis = 0)</div><div class="line"></div><div class="line">    return centroids, clusterAssment</div></pre></td></tr></table></figure>
-<p>​    kMeans()函数接受四个参数，只有数据集及簇的数目是必选参数，而用来计算距离和创建初始质心的函数都是可选的。kMeans()一开始确定数据集中数据点的总数，然后创建一个矩阵来存储每个点的簇分配结果。簇分配结果矩阵clusterAssment包含两列:一列记录簇索引值，第二列存储误差。这里的误差是指当前点到簇质心的距离，后边会使用该误差来评价聚类的效果。按照上述方式(即计算质心-分配-重新计算)反复迭代，直到所有数据点的簇分配结果不再改变为止 。</p>
-<p>​    最后遍历所有质心并更新他们的取值，首先通过数组过滤来获得给定簇的所有点，遍历所有点计算均值，axis=0表示沿数组的列方向计算均值，最后返回所有类质心与点分配结果。<br>​        </p>
-<h5 id="2-3-测试k-means算法："><a href="#2-3-测试k-means算法：" class="headerlink" title="2.3 测试k-means算法："></a>2.3 测试k-means算法：</h5><p>​    读取数据：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line">def loadDataSet(self, fileName, attrType=None):</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    装载数据集</div><div class="line">    :param fileName:    文件地址</div><div class="line">    :param attrType:    打开类型</div><div class="line">    :return: 数据集， 标签集</div><div class="line">    &quot;&quot;&quot;</div><div class="line">    # 打开文件，定义编码</div><div class="line">    dataFile = open(fileName, &apos;r&apos;, encoding=&apos;utf-8&apos;)</div><div class="line">    lines = dataFile.readlines()</div><div class="line"></div><div class="line">    # 循环推导式，解析每一行，生成行数组</div><div class="line">    matrix = [self.parseLine(line, attrType=attrType) for line in lines]</div><div class="line">    # 关闭文件</div><div class="line">    dataFile.close()</div><div class="line"></div><div class="line">    # labels = matrix[0]</div><div class="line">    # dataSets = matrix[1:]</div><div class="line"></div><div class="line">    return matrix</div><div class="line"></div><div class="line">def parseLine(self, line, attrType=None):</div><div class="line">    &quot;&quot;&quot;解析行，生成列数组&quot;&quot;&quot;</div><div class="line">    # 根据制表符分割数据</div><div class="line">    # 字符串函数</div><div class="line">    words = line.strip().split(&apos;\t&apos;)</div><div class="line">    # 判断None要用is</div><div class="line">    if attrType is None:</div><div class="line">        return words</div><div class="line"></div><div class="line">    # 循环推导式，将字符串数组转换成对应类型数组</div><div class="line">    return [attrType(word) for word in words]</div></pre></td></tr></table></figure>
-<p>​    数据：</p>
-<p><code>1.658985    4.285136</code><br><code>-3.453687    3.424321</code><br><code>4.838138    -1.151539</code><br><code>-5.379713    -3.362104</code><br><code>0.972564    2.924086</code><br><code>-3.567919    1.531611</code><br><code>0.450614    -3.302219</code><br><code>-3.487105    -1.724432</code><br><code>2.668759    1.594842</code><br><code>-3.156485    3.191137</code><br><code>3.165506    -3.999838</code><br><code>-2.786837    -3.099354</code><br><code>4.208187    2.984927</code><br><code>-2.123337    2.943366</code><br><code>0.704199    -0.479481</code><br><code>-0.392370    -3.963704</code><br><code>2.831667    1.574018</code><br><code>-0.790153    3.343144</code><br><code>2.943496    -3.357075</code><br><code>-3.195883    -2.283926</code><br><code>2.336445    2.875106</code><br><code>-1.786345    2.554248</code><br><code>2.190101    -1.906020</code><br><code>-3.403367    -2.778288</code><br><code>1.778124    3.880832</code><br><code>-1.688346    2.230267</code><br><code>2.592976    -2.054368</code><br><code>-4.007257    -3.207066</code><br><code>2.257734    3.387564</code><br><code>-2.679011    0.785119</code><br><code>0.939512    -4.023563</code><br><code>-3.674424    -2.261084</code><br><code>2.046259    2.735279</code><br><code>-3.189470    1.780269</code><br><code>4.372646    -0.822248</code><br><code>-2.579316    -3.497576</code><br><code>1.889034    5.190400</code><br><code>-0.798747    2.185588</code><br><code>2.836520    -2.658556</code><br><code>-3.837877    -3.253815</code><br><code>2.096701    3.886007</code><br><code>-2.709034    2.923887</code><br><code>3.367037    -3.184789</code><br><code>-2.121479    -4.232586</code><br><code>2.329546    3.179764</code><br><code>-3.284816    3.273099</code><br><code>3.091414    -3.815232</code><br><code>-3.762093    -2.432191</code><br><code>3.542056    2.778832</code><br><code>-1.736822    4.241041</code><br><code>2.127073    -2.983680</code><br><code>-4.323818    -3.938116</code><br><code>3.792121    5.135768</code><br><code>-4.786473    3.358547</code><br><code>2.624081    -3.260715</code><br><code>-4.009299    -2.978115</code><br><code>2.493525    1.963710</code><br><code>-2.513661    2.642162</code><br><code>1.864375    -3.176309</code><br><code>-3.171184    -3.572452</code><br><code>2.894220    2.489128</code><br><code>-2.562539    2.884438</code><br><code>3.491078    -3.947487</code><br><code>-2.565729    -2.012114</code><br><code>3.332948    3.983102</code><br><code>-1.616805    3.573188</code><br><code>2.280615    -2.559444</code><br><code>-2.651229    -3.103198</code><br><code>2.321395    3.154987</code><br><code>-1.685703    2.939697</code><br><code>3.031012    -3.620252</code><br><code>-4.599622    -2.185829</code><br><code>4.196223    1.126677</code><br><code>-2.133863    3.093686</code><br><code>4.668892    -2.562705</code><br><code>-2.793241    -2.149706</code><br><code>2.884105    3.043438</code><br><code>-2.967647    2.848696</code><br><code>4.479332    -1.764772</code><br><code>-4.905566    -2.911070</code></p>
-<p>​    对datMat中的数据点进行聚类处理，从图像中可以大概预先知道最后的结果应该有4个簇。运行程序，经过4次迭代，算法收敛。</p>
-<h5 id="2-4-使用后处理来提高聚类性能"><a href="#2-4-使用后处理来提高聚类性能" class="headerlink" title="2.4 使用后处理来提高聚类性能"></a>2.4 使用后处理来提高聚类性能</h5><p>​    前面提到，在K均值聚类中簇的数目k是一个用户预先定义的参数，那么用户如何才能知道k的选择是否正确?如何才能知道生成的簇比较好呢?在包含簇分配结果的矩阵中保着每个点的误差，即该点到簇质心的距离平方值。下面会讨论利用该误差来评价聚类质量的方法。</p>
-<p>​    一般用于度量聚类效果的指标是SSE（误差平方和），SSE值越小表示数据点越接近于它们的质心，聚类效果也越好。因为对误差取了平方，因此更加重视那些远离中心的点。一种肯定可以降低SSE值的方法是增加簇的个数，但这违背了聚类的目标。聚类的目标是在保持族数目不变的情况下提高簇的质量。</p>
-<p>​    K-均值算法收敛但聚类效果较差的原因是，K-均值算法收敛到了局部最小值，而非全局最小值(局部最小值指结果还可以但并非最好结果，全局最小值是可能的最好结果)。                    </p>
-<p>​    那么如何对以上程序进行改进，可以对生成的簇进行后处理，一种方法是可以将具有最大SSE的簇划分成两个。具体实现时可以将最大簇包含的点过滤出来并在这些点上运行K-均值算法。</p>
-<h5 id="2-5-二分K均值算法"><a href="#2-5-二分K均值算法" class="headerlink" title="2.5 二分K均值算法"></a>2.5 二分K均值算法</h5><p>​    为克服K-均值算法收敛域局部最小值，有人提出了二分K均值算法。该算法首先将所有点作为一个簇，然后将该簇一分为二。之后选择其中一个簇继续进行划分，选择哪一个簇进行划，一种方法是对”其划分是否可以最大程度降低SSE的值”。上述基于SSE的划分过程不断重复，直到得到用户指定的簇数目为止。另一种做法是选择SSE最大的簇进行划分，直到簇数目达到用户指定的数目为止。代码如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">def biKMeans(dataSet, k, distMeas=utils.distEclud):</div><div class="line">    num = np.shape(dataSet)[0]</div><div class="line">    clusterAssment = np.mat(np.zeros((num, 2)))</div><div class="line">    centroid_first = np.mean(dataSet, axis=0).tolist()[0]</div><div class="line">    centList = [centroid_first]</div><div class="line"></div><div class="line">    for j in range(num):</div><div class="line">        clusterAssment[j, 1] = distMeas(np.mat(centroid_first), dataSet[j, :]) ** 2</div><div class="line"></div><div class="line">    while(len(centList) &lt; k):</div><div class="line">        lowestSSE = np.inf</div><div class="line">        bestCentToSplit = 0</div><div class="line">        for i in range(len(centList)):</div><div class="line">            ptsInCurrCluster = dataSet[np.nonzero(clusterAssment[:, 0].A == i)[0], :]</div><div class="line">            centroidMat, splitClustAss = kMeans.kMeans(dataSet, 2, distMeas)</div><div class="line">            sseSplit = np.sum(splitClustAss[:, 1])</div><div class="line">            sseNotSplit = np.sum(clusterAssment[np.nonzero(clusterAssment[:, 0].A != i)[0], 1])</div><div class="line"></div><div class="line">            if (sseSplit + sseNotSplit) &lt; lowestSSE:</div><div class="line">                bestCentToSplit = i</div><div class="line">                bestNewCents = centroidMat</div><div class="line">                bestClustAss = splitClustAss.copy()</div><div class="line">                lowestSSE = sseSplit + sseNotSplit</div><div class="line"></div><div class="line">        matrix = bestClustAss[:, 0].A</div><div class="line">        index_list = np.nonzero(bestClustAss[:, 0].A == 1)[0]</div><div class="line"></div><div class="line">        bestClustAss[np.nonzero(bestClustAss[:, 0].A == 1)[0], 0] = len(centList)</div><div class="line">        bestClustAss[np.nonzero(bestClustAss[:, 0].A == 0)[0], 0] = len(centList)</div><div class="line"></div><div class="line">        print(&apos;the bestCentToSplit is %d&apos; % bestCentToSplit)</div><div class="line"></div><div class="line">        centList[bestCentToSplit] = bestNewCents[0, :]</div><div class="line">        centList.append(bestNewCents[1, :])</div><div class="line">        clusterAssment[np.nonzero(clusterAssment[:, 0].A == bestCentToSplit)[0], :] = bestClustAss</div><div class="line"></div><div class="line">    return np.mat(centList), clusterAssment</div></pre></td></tr></table></figure>
-<p>​    在给定数据集、所期望的簇数目和距离计算方法的条件下，函数返回聚类结果。同咖kMeans一样，用户可以改变所使用的距离计算方法。该函数首先创建一个矩阵来存储数据集中每个点的簇分配结果及平方误差，然后计算整个数据集的质心，并使用一个列表来保留所有的质心。得到初始质心后，可以遍历数据集中所有的点来计算每个点到质心的误差。</p>
-<p>​    接下来进入循环对簇进行划分，知道得到想要的簇数目为止。可以通过考察簇列表中的值来获得当前簇的数目，然后遍历所有的簇来决定最佳的簇进行划分。为此需要比较划分前后的SSE，一开始将最小SSE设置为无穷大，然后遍历簇列表centList中的每一个簇。对每个簇中的所有点看成一个小的数据集ptsInCurrCluster，输入到函数kMeans中进行处理（k = 2）。k均值算法将会生成两个质心，同时计算每个簇的误差值。这些误差与剩余数据集的误差之和作为本次划分的误差。如果该划分的SSE值最小，则本次划分被保存。一旦决定了要划分的簇，接下来就要实际执行划分操作。划分操作很容易，只需要将要划分的簇中所有点的簇分配结果进行修改即可。当使用<br>kMeans ()函数并且指定簇数为2时 ，会得到两个编号分别为0和1的结果簇。需要将这些簇编号修改为划分簇及新加簇的编号，该过程可以通过两个数组过滤器来完成。最后新的簇分配结果被更新，新的质心会被添加到centList中。                        </p>
-<h3 id="3-对地图上的点进行聚类"><a href="#3-对地图上的点进行聚类" class="headerlink" title="3. 对地图上的点进行聚类"></a>3. 对地图上的点进行聚类</h3><p>​<br>​<br>​    </p>
-<p>​<br>​<br>​    </p>
-<p>​    </p>
-<p>​<br>​<br>​    </p>
-<p>​<br>​<br>​    </p>
-<p>​<br>​    </p>
-<p>​    </p>
+        <div class="article-info info-on-right">
+          
+          
 
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/07/24/fourth-article/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/02/07/sixth-article/" class="archive-article-date">
+  	<time datetime="2018-02-07T15:33:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
+</a>
+        </div>
+    	 
   
-    <a href="/2017/10/08/fifth-article/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          机器学习算法之（三）—基于概率论的分类方法：朴素贝叶斯
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2017/07/24/third-article/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">机器学习算法之(一)--决策树</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-  
-  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/02/07/sixth-article/">机器学习算法（四）— 支持向量机</a>
+    </h1>
   
 
+        <div class="article-info info-on-right">
+          
+          
+
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
+  
+  
+    </div></section>
   
 
-  
+    
 
 
           </div>
@@ -354,8 +248,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

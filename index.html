@@ -158,6 +158,158 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-seventh-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/05/27/seventh-article/">小程序webview传递Cookie引发的 Cookie的session的思考</a>
+    </h1>
+  
+
+        
+        <a href="/2018/05/27/seventh-article/" class="archive-article-date">
+  	<time datetime="2018-05-27T09:07:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一-事发场景"><a href="#一-事发场景" class="headerlink" title="一. 事发场景"></a>一. 事发场景</h2><p>​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出cookie去做处理就可以了，看似天衣无缝，其实里面隐藏了一个很严重的理解问题，经过同事的指点，这里url带上的用户标识并不是cookie，而是服务端的sessionId。下图是小程序的response headers，<img src="/2018/05/27/seventh-article/image-1.png" alt="image-1"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/05/27/seventh-article/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-sixth-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/07/sixth-article/">机器学习算法（四）— 支持向量机</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/07/sixth-article/" class="archive-article-date">
+  	<time datetime="2018-02-07T15:33:05.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>​    支持向量机（Support Vector Machines, SVM）被许多人认为是现成的最好的分类器，“现成”指分类器不加修饰即可以直接使用。同时，这就意味着在数据上应用基本形式的SVM分类器就可以得到低错误率的结果。SVM能够对训练集之外的数据点做出很好的分类决策。下面介绍一种最流行的SVM实现，<strong>序列最小化算法（SMO）</strong></p>
+<h4 id="一-基于最大间隔分割数据"><a href="#一-基于最大间隔分割数据" class="headerlink" title="一  基于最大间隔分割数据"></a>一  基于最大间隔分割数据</h4><ul>
+<li><p>​    优点：泛化错误率低，计算开销不大，结果易于理解<br>   ​    缺点：对参数调节和核函数的选择敏感，原始分类器不修改仅适用于处理二类问题。<br>   ​    适用数据类型：数值型和标称型数据。        </p>
+<p>  ​    </p>
+<pre><code>在下图中，很容易在途中画出一条直线将两组数据点分开。在这种情况下，这组数据被称为线性可分数据，这条将数据分开的直线称为**分割超平面（separating hyperplane）**。
+</code></pre></li>
+</ul>
+<p><img src="/Users/leijia/workspace/jialeigd/source/_posts/sixth-article/sixth_1.jpeg" alt="sixth_1"></p>
+<p>​    在上面给出的例子中，由于数据点都在二维平面上，所以此时分隔超平面就只是一条直线。但是，如果所给的数据集是三维的，那么此时用来分隔数据的就是一个平面。显而易见，更高维的情况可以依此类推。如果数据集是1024维的，那么就需要一个1023维的某某对象来对数据进行分隔。这个1023维的某某对象到底应该叫什么?N-1维呢?该对象被称为<strong>超平面(hyperplane)</strong> ，也就是分类的决策边界。分布在超平面一侧的所有数据都属于某个类别，而分布在另一侧的所有数据则属于另一个类别。</p>
+<p>​    我们希望能采用这种方式来构建分类器，即如果数据点离决策边界越远,’那么其最后的预测结果也就越可信。考虑到上图中B到D的三条直线，他们都能将数据分隔开，但是哪一条最好呢？是否应该最小化数据点到分割超平面的平均距离？我们希望找到离分隔超平面最近的点，确保它们离分隔面的距离尽可能远。这里点到分隔面的距离被称为<strong>间隔（margin）</strong>。我们希望间隔尽可能的大，这是如果我们犯错或者再有限数据上训练分类器的话，我们希望分类器尽可能的健壮。    </p>
+<p>​    <strong>支持向量（support vector）</strong>就是离分割超平面最近的那些点。接下来要试着最大化支持向量到分割面的距离，需要找到此问题的优化求解方法。</p>
+<h4 id="二-寻找最大间隔"><a href="#二-寻找最大间隔" class="headerlink" title="二 寻找最大间隔"></a>二 寻找最大间隔</h4><p>​    如何求解数据集的最佳分割直线？如下图，分割超平面的形式可以写成|Wª * A + b    | / ||w||.这里的向量W和常数b一起描述了所给数据的分隔线或超平面。</p>
+<h5 id="1-分类器求解的优化问题"><a href="#1-分类器求解的优化问题" class="headerlink" title="1 分类器求解的优化问题"></a>1 分类器求解的优化问题</h5><p>​    前面已经提到分类器，但还没有介绍它的工作原理。理解其工作原理有助于理解基于优化问题的分类器求解过程，输入数据给分类器会输出一个类别标签，这相当于一个类似于sigmoid的函数在作用。下面使用单位阶跃函数的函数对WtX+b作用得到 f(WªX + b), 其中当u&lt;0时 输出-1，反之输出1.这里使用-1和1因为-1和1相差一个符号，方便数学上的处理。我们可以通过一个统一的公式来表示间隔或者数据点到分隔超平面的距离，同时不必担心数据到底是属于-1还是+1类。</p>
+<p>​    当计算数据点到分隔面的距离并确定分割面的放置位置时，间隔通过label * (Wt + b) 来计算，这时就能体现出-1和1的好处。</p>
+<p>​    现在的目标就是找出分类器定义中的w和b。为此，我们必须找到具有最小间隔的数据点，而这些数据点也就是前面提到的支持向量。一旦找到最小间隔的数据点，我们就需要对该间隔最大化。<br>$$<br>argmax{min(label.(Wtx + b)).1 / ||w||}<br>$$<br>​    直接求解上述问题相当困难，所以我们将它转换成为另一种更容易求解的形式。首先考察一下上式中大括号内的部分。由于对乘积进行优化是一件很讨厌的事情，因此我们要做的是固定其中一个因子而最大化其他因子。如果令所有支持向量的label.(Wtx + b) 都为1，那么就可以通过求1 / ||w||的最大值来得到最终解。但是，并非所有数据点的label.(Wtx + b)都等于1，只有那些离分隔超平面最近的点得到的值才为1。而离超平面越远的数据点，其label.(Wtx + b)的值也就越大。</p>
+<p>​    在上述问题中，给定了一些约束条件然后求最优值，因此该问题是一个带约束条件的优化问题。这里的优化条件就是label.(Wtx + b).对于这类优化问题，有一个非常著名的求即拉格朗日乘子法。通过引人拉格朗日乘子，我们就可以基于约束条件来表述原来的问题。由于这里的约束条件都是基于数据点的，因此我们就可以将超平面写成数据点的形式。于是优化目标函数最后可以写成:</p>
+<p>​    <img src="/Users/leijia/workspace/jialeigd/source/_posts/sixth-article/sixth_2.jpeg" alt="sixth_2"></p>
+<p>​    其约束条件为</p>
+<p><img src="/Users/leijia/workspace/jialeigd/source/_posts/sixth-article/sixth_3.jpeg" alt="sixth_3"></p>
+<p>​    至此，一切都很完美，但是这里有个假设:数据必须线性可分。目前为止，我们知道几乎所有数据都不那么®干净 。这时我们就可以通过引人所谓松弛变量，来允许有些数据点可以处于分隔面的错误一侧。这样我们的优化目标就能保持仍然不变，但是此时新的约束条件则变为</p>
+<p>​        <img src="/Users/leijia/workspace/jialeigd/source/_posts/sixth-article/sixth_4.jpeg" alt="sixth_4"><br>​    这里的常数C. 用于控制最大化间隔 和 保证大部分点的函数间隔小于1.0  这两个目标的权重。在优化算法的实现代码中，常数C是一个参数，因此我们就可以通过调节该参数得到不同的结果。一旦求出了所有的alpha，那么分隔超平面就可以通过这些alpha来表达。</p>
+<p>​    </p>
+<h5 id="2-SVM的一般框架"><a href="#2-SVM的一般框架" class="headerlink" title="2 SVM的一般框架"></a>2 SVM的一般框架</h5><ul>
+<li>收集数据</li>
+<li>准备数据</li>
+<li>分析数据：有助于可视化分割超平面</li>
+<li>训练算法：SVM大部分时间都源自训练，该过程主要是两个参数的调优</li>
+<li>测试算法：十分简单的j计算过程就可以实现</li>
+<li>使用算法：几乎所有分类问题都可以使用SVM。</li>
+</ul>
+<p>下面介绍一种SVM算法的实现。SMO算法</p>
+<h4 id="三-SMO高效优化算法"><a href="#三-SMO高效优化算法" class="headerlink" title="三 SMO高效优化算法"></a>三 SMO高效优化算法</h4><p>​    接下来，我们根据6.2.1节中的最后两个式子进行优化，其中一个是最小化的目标函数，一个是在优化过程中必须遵循的约束条件。下面我们就来讨论SMO算法，</p>
+<h5 id="1-platt的SMO算法"><a href="#1-platt的SMO算法" class="headerlink" title="1 platt的SMO算法"></a>1 platt的SMO算法</h5><p>​    1996年，platt发布了一个SMO的强大算法，用于训练SVM。SMO用于表示序列最小化。SMO算法是将大优化问题分解为多个小优化问题来求解的。这些小优化问题往往很容易求解，并且对他们进行顺序求解的结果与将他们整体求解的结果是一致的。在结果完全相同时，SMO算法求解时间短很多。</p>
+<p>​    SMO算法的目的是求出一系列的alpha和B ,一旦求出了这些alpha，就很容易计算出权重向量W并得到分割超平面。</p>
+<p>​    SMO算法的工作原理是：每次循环中选择两个alpha进行优化处理，一旦找到一对合适的alpha，那么就增大其中一个减小另一个。这里的合适是指两个alpha要符合一定的条件，一是这两个alpha要在间隔边界之外，二是这两个alpha还没有进行过区间化处理或者不在边界上。</p>
+<h5 id="2-应用简化版SMO算法处理小规模数据集："><a href="#2-应用简化版SMO算法处理小规模数据集：" class="headerlink" title="2 应用简化版SMO算法处理小规模数据集："></a>2 应用简化版SMO算法处理小规模数据集：</h5><p>​    下面我们会对算法进行简化处理，以便了解算法的基本工作思路，之后再给出完整版。首先在数据集上遍历每一个alpha，然后再剩下alpha集合中随机选择另外一个alpha来构建alpha对。有一点相当重要，就是要同时改变两个alpha对。之所以这样做是因为有一个约束条件：<br>$$<br>∑å•label(i) = 0<br>$$<br>由于改变一个alphah会导致该约束条件失败，因此我们总是同时改变两个alpha。</p>
+<p>​    下面构建两个辅助函数一个负责在某个区间随机选择一个整数，另一个负责用于在数值太大时对其进行调整。下面给出实现。</p>
+<p>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">def loadDataSet(fileName):</div><div class="line">    dataMat = []</div><div class="line">    labelMat = []</div><div class="line"></div><div class="line">    with open(fileName) as file:</div><div class="line">        for line in file.readlines():</div><div class="line">            lineArr = line.strip().split(&apos;\t&apos;)</div><div class="line">            dataMat.append([float(lineArr[0]), float(lineArr[1])])</div><div class="line">            labelMat.append(float(lineArr[2]))</div><div class="line"></div><div class="line">    return dataMat, labelMat</div><div class="line"></div><div class="line"></div><div class="line">def selectedJRand(i, m):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    只要函数值不等于输入值i，函数就会进行随机选择</div><div class="line">    :param i: 第一个alpha的下标</div><div class="line">    :param m: alpha的数目</div><div class="line">    :return: </div><div class="line">    &apos;&apos;&apos;</div><div class="line">    j = i</div><div class="line">    while(j == i):</div><div class="line">        j = int(random.uniform(0, m))</div><div class="line"></div><div class="line">    return j</div><div class="line"></div><div class="line"></div><div class="line">def clipAlpha(aj, H, L):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    用于调整大于H和小于L的值</div><div class="line">    :param aj: </div><div class="line">    :param H: </div><div class="line">    :param L: </div><div class="line">    :return: </div><div class="line">    &apos;&apos;&apos;</div><div class="line">    if aj &gt; H:</div><div class="line">        aj = H</div><div class="line">    if aj &lt; L:</div><div class="line">        aj = L</div><div class="line"></div><div class="line">    return aj</div></pre></td></tr></table></figure>
+<p>函数selectedJRand有两个参数值，其中i是第一个alpha的下标，m是所有alpha的数目。只要函数值不等于输人值i，函数就会进行随机选择。    最后一个辅助函数就是clipAlpha，它是用于调整大于H或小于L的alpha值 。尽管上述 三个辅助函数本身做的事情不多，但在分类器中却很有用处。    </p>
+<p>​    SMO算法的伪代码大致如下：</p>
+<p>创建一个alpha向量并将其初始化为0向量</p>
+<p>当迭代次数小于最大迭代次数时（外循环）</p>
+<p>​    对数据集中的每个数据向量（内循环）：</p>
+<p>​        如果该数据向量可以被优化：</p>
+<p>​            随机选择另外一个数据向量</p>
+<p>​            同时优化这两个向量</p>
+<p>​            如果两个向量都不能被优化，退出内循环</p>
+<p>​    如果所有向量都没被优化，增加迭代数目，继续下一次循环</p>
+<p>​    简化版SMO算法：</p>
+<p>​    构建Svm分类器类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import numpy as np</div><div class="line">import dataReader as dr</div><div class="line"></div><div class="line">class SvmClassifier(object):</div><div class="line">    def __init__(self, C=0.5, error=0.001, iteration=10):</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        分类器初始化方法</div><div class="line">        :param C:   松弛系数</div><div class="line">        :param error:   容错率</div><div class="line">        :param iteration:   迭代次数</div><div class="line">        &apos;&apos;&apos;</div><div class="line">        self.C = C</div><div class="line">        self.error = error</div><div class="line">        self.iteration = iteration</div><div class="line"></div><div class="line">        self.alphas = None</div><div class="line">        self.b = 0</div></pre></td></tr></table></figure>
+<p>​            </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">def train(self, trainData, labels):</div><div class="line">    trainDataMat = np.mat(trainData)</div><div class="line">    labelsDataMat = np.mat(labels).transpose()</div><div class="line"></div><div class="line">    m, n = trainDataMat.shape</div><div class="line">    alphas = np.mat(np.zeros((m, 1)))</div><div class="line">    b = 0</div><div class="line"></div><div class="line">    currentIter = 0</div><div class="line">    while currentIter &lt; self.iteration:</div><div class="line">        alphaChanged = False</div><div class="line"></div><div class="line">        for i in range(m):</div><div class="line">            ui = SvmClassifier.fx(trainDataMat, labelsDataMat, alphas, b, i)</div><div class="line">            errorI = ui - float(labelsDataMat[i])</div><div class="line"></div><div class="line">            if ((labelsDataMat[i] * errorI &lt; -self.error) and (alphas[i] &lt; self.C) or\</div><div class="line">                        ((labelsDataMat[i] * errorI &gt; self.error) and (alphas[i] &gt; 0))):</div><div class="line">                j = dr.selectedJRand(i, m)</div><div class="line">                uj = SvmClassifier.fx(trainDataMat, labelsDataMat, alphas, b, j)</div><div class="line">                errorJ = uj - float(labelsDataMat[j])</div><div class="line"></div><div class="line">                oldAlphaI = alphas[i].copy()</div><div class="line">                oldAlphaJ = alphas[j].copy()</div><div class="line"></div><div class="line">                if labelsDataMat[i] != labelsDataMat[j]:</div><div class="line">                    L = max(0., alphas[j] - alphas[i])</div><div class="line">                    H = min(self.C, self.C + alphas[j] - alphas[i])</div><div class="line">                else:</div><div class="line">                    L = max(0., alphas[j] + alphas[i] - self.C)</div><div class="line">                    H = min(self.C, alphas[j] + alphas[i])</div><div class="line"></div><div class="line">                if L == H:</div><div class="line">                    continue</div><div class="line"></div><div class="line">                eta = trainDataMat[i, :] * trainDataMat[i, :].T + trainDataMat[j, :] * trainDataMat[j, :].T +\</div><div class="line">                      2.0 * trainDataMat[i, :] * trainDataMat[j, :].T</div><div class="line"></div><div class="line">                if eta &lt; 0:</div><div class="line">                    continue</div><div class="line"></div><div class="line">                alphas[j] += labelsDataMat[j] * (errorI - errorJ) / eta</div><div class="line">                alphas[j] = dr.clipAlpha(alphas[j], L, H)</div><div class="line"></div><div class="line">                if abs(alphas[j] - oldAlphaJ) &lt; 0.00001:</div><div class="line">                    continue</div><div class="line"></div><div class="line">                alphas[i] += labelsDataMat[j] * labelsDataMat[i] * (oldAlphaJ - alphas[j])</div><div class="line">                b1 = b - errorI - labelsDataMat[i] * (alphas[i] - oldAlphaI) * trainDataMat[i, :] * trainDataMat[i, :].T - \</div><div class="line">                     labelsDataMat[j] * (alphas[j] - oldAlphaJ) * trainDataMat[i, :] * trainDataMat[j, :].T</div><div class="line"></div><div class="line">                b2 = b - errorJ - labelsDataMat[i] * (alphas[i] - oldAlphaI) * trainDataMat[i, :] * trainDataMat[j, :].T - \</div><div class="line">                     labelsDataMat[j] * (alphas[j] - oldAlphaJ) * trainDataMat[j, :] * trainDataMat[j, :].T</div><div class="line"></div><div class="line">                if 0 &lt; alphas[i] &lt; self.C:</div><div class="line">                    b = b1</div><div class="line">                elif 0 &lt; alphas[j] &lt; self.C:</div><div class="line">                    b = b2</div><div class="line">                else:</div><div class="line">                    b = (b1 + b2) / 2</div><div class="line"></div><div class="line">                print(&apos;Iteration: &#123;iteration&#125;, i : &#123;i&#125; changed&apos;.format(self.iteration))</div><div class="line"></div><div class="line">        if not alphaChanged:</div><div class="line">            currentIter += 1</div><div class="line">        else:</div><div class="line">            currentIter = 0</div><div class="line"></div><div class="line">    self.alphas = alphas</div><div class="line">    self.b = b</div></pre></td></tr></table></figure>
+<p>​    </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">@staticmethod</div><div class="line">def fx(trainMat, labelMat, alphas, b, i):</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    根据目标函数来预测数据</div><div class="line">    :param trainMat:    训练数据</div><div class="line">    :param labelMat:    标签数据</div><div class="line">    :param alphas:      </div><div class="line">    :param b:   </div><div class="line">    :param i:           参数索引</div><div class="line">    :return: </div><div class="line">    &apos;&apos;&apos;</div><div class="line">    return float(np.multiply(alphas, labelMat).T * (trainMat * trainMat[i, :].T)) + b</div></pre></td></tr></table></figure>
+<p>​    </p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/07/sixth-article/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-fifth-article" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -434,7 +586,7 @@
 <p>​    熵定义为信息的期望值，在明晰这个概念之前，我们必须知道信息的定义。如果待分类的事 务可能划分在多个分类之中’ 则符号^的信息定义为</p>
 <p>$$<br>l(Xi) = -log2p(Xi)<br>$$</p>
 <p>其中p(Xi) 是 选择了该分类的概率，为了计算熵，我们需要计算所有类别所有可能值包含的信息期望值，通过下面的公式得到:</p>
-<p><img src="./third-article-image/CodeCogsEqn3_1.png" alt=""></p>
+<p><img src="/2017/07/24/third-article/CodeCogsEqn3_1.png" alt=""></p>
 <p>python实现计算给定数据集的熵:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">from math import log</div><div class="line"></div><div class="line">def calcShannonEnt(dataSet):</div><div class="line"></div><div class="line">    numEntries = len(dataSet)</div><div class="line">    labelCounts = &#123;&#125;</div><div class="line"></div><div class="line">    for featVec in dataSet:</div><div class="line">        currentLabel = featVec[-1]</div><div class="line">        if currentLabel not in labelCounts.keys():</div><div class="line">            labelCounts[currentLabel] = 0</div><div class="line">            labelCounts[currentLabel] += 1</div><div class="line"></div><div class="line">    shannonEnt = 0.0</div><div class="line">    for key in labelCounts:</div><div class="line">        prob = float (labelCounts [key] ) / numEntries</div><div class="line">        shannonEnt -= prob * log(prob,2)</div><div class="line">        </div><div class="line">    return shannonEnt</div></pre></td></tr></table></figure>
 <p>​    首先,计算数据集中实例的总数。我们也可以在需要时再计算这个值，但是由于代码中多次用到这个值，为了提高代码效率，我们显式地声明一个变量保存实例总数。然后，创建一个数据字典，它的键值是最后一列的数值0 。如果当前键值不存在，则扩展字典并将当前键值加入字典。每个键值都记录了当前类别出现的次数。最 后 ，使用所有类标签的发生频率计算类别出现的概率。我们将用这个概率计算香农熵，统计所有类标签发生的次数。下面我们看看如何使用熵划分数据集。</p>
