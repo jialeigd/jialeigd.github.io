@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="贾磊的猜想">
 <meta property="og:description" content="一. 事发场景​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/seventh-article/image-1.jpeg">
-<meta property="og:updated_time" content="2018-05-30T15:40:20.418Z">
+<meta property="og:updated_time" content="2018-05-31T04:38:30.437Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序webview传递Cookie引发的思考">
 <meta name="twitter:description" content="一. 事发场景​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似">
@@ -192,8 +192,7 @@
 <pre><code>并且AFNetworking保存Cookie后,通过UIWebView的loadRequest方法load NSURLRequest时可以共用cookie。
 </code></pre><h6 id="2-WKWebview设置Cookie"><a href="#2-WKWebview设置Cookie" class="headerlink" title="2 WKWebview设置Cookie:"></a>2 WKWebview设置Cookie:</h6><p>​    之前提到UIWebView 中loadRequest可以自动使用保存好的 Cookie, 体会到了iOS框架设计者的贴心，然而事情不总是这么完美，iOS 8 后退出的WKWebview并没有这个能力，需要手动添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (void)loadRequest: (NSMutableURLRequest *)request &#123;</div><div class="line"></div><div class="line">    NSString * sessionId = @&quot;&quot;;</div><div class="line">    for (NSHTTPCookie * cookie in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) &#123;</div><div class="line">        if ([cookie.name isEqualToString:@&quot;session&quot;]) &#123;</div><div class="line">            sessionId = cookie.value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    NSString * session = [NSString stringWithFormat:@&quot;%@=%@&quot;,@&quot;session&quot;, sessionId];</div><div class="line"></div><div class="line">    [request addValue: sessionforHTTPHeaderField:@&quot;cookie&quot;];</div><div class="line"></div><div class="line">    [_webView loadRequest: request];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="四-使用Cookie和Session机制的缺点"><a href="#四-使用Cookie和Session机制的缺点" class="headerlink" title="四. 使用Cookie和Session机制的缺点"></a>四. 使用Cookie和Session机制的缺点</h3><p>​    对服务端来说要保持所以用的session，是个不小的负担。</p>
-
+<h3 id="四-使用Cookie和Session机制的缺点"><a href="#四-使用Cookie和Session机制的缺点" class="headerlink" title="四. 使用Cookie和Session机制的缺点"></a>四. 使用Cookie和Session机制的缺点</h3>
       
 
       
