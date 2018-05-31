@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>小程序webview传递Cookie引发的思考 | 贾磊的猜想</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="一. 事发场景​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似">
+  <meta name="description" content="一. 事发场景​      最近开发小程序，早就听说小程序开放了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学商量后决定，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似天">
 <meta property="og:type" content="article">
 <meta property="og:title" content="小程序webview传递Cookie引发的思考">
 <meta property="og:url" content="http://yoursite.com/2018/05/27/seventh-article/index.html">
 <meta property="og:site_name" content="贾磊的猜想">
-<meta property="og:description" content="一. 事发场景​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似">
+<meta property="og:description" content="一. 事发场景​      最近开发小程序，早就听说小程序开放了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学商量后决定，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似天">
 <meta property="og:image" content="http://yoursite.com/2018/05/27/seventh-article/image-1.jpeg">
-<meta property="og:updated_time" content="2018-05-31T04:38:30.437Z">
+<meta property="og:updated_time" content="2018-05-31T04:53:30.050Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序webview传递Cookie引发的思考">
-<meta name="twitter:description" content="一. 事发场景​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似">
+<meta name="twitter:description" content="一. 事发场景​      最近开发小程序，早就听说小程序开放了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学商量后决定，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似天">
 <meta name="twitter:image" content="http://yoursite.com/2018/05/27/seventh-article/image-1.jpeg">
   
     <link rel="alternative" href="/atom.xml" title="贾磊的猜想" type="application/atom+xml">
@@ -179,10 +179,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="一-事发场景"><a href="#一-事发场景" class="headerlink" title="一. 事发场景"></a>一. 事发场景</h3><p>​      最近开发小程序，早就听说小程序开发了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学愉快的决定了，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似天衣无缝，其实里面隐藏了一个很严重的理解问题，经过同事的指点，这里url带上的用户标识并不是Cookie，而是服务端的sessionId。下图是小程序的response headers，</p>
+        <h3 id="一-事发场景"><a href="#一-事发场景" class="headerlink" title="一. 事发场景"></a>一. 事发场景</h3><p>​      最近开发小程序，早就听说小程序开放了webview控件，一些静态H5页面可以直接考虑通过webview跳转url打开，开发过程中发现小程序的webview没有提供直接设置Cookie的方法，只能在url中带上服务器返回的session,  于是和后端的同学商量后决定，在url里带上cookie=’xxx’, 后端从cookie里解析出Cookie去做处理就可以了，看似天衣无缝，其实里面隐藏了一个很严重的理解问题，经过同事的指点，这里url带上的用户标识并不是Cookie，而是服务端的sessionId。下图是小程序的response headers，</p>
 <p><img src="/2018/05/27/seventh-article/image-1.jpeg" alt="image-1"></p>
-<p>​    可以看到，每次请求服务端都会通过Set-Cookie的标准形式设置ResponseHeaders的cookie，这里Cookie是一个key-value形式的值，除了session还有其他信息，所以cookie也经常被称为cookies，其中的服务器session只是通过Cookie来传递的一个值，所以前端再请求url中带上的应该是这个sessionId。</p>
-<p>​    由于微信并没有给小程序开放保存，设置Cookie的接口，只能手动取出在请求中的Set-Cookie字段，解析出session，在发起请求的时候设置到请求header中。另外在浏览器中有一套成熟且自动的解析，保存，设置Cookie的机制。</p>
+<p>​    可以看到，每次请求服务端都会通过Set-Cookie的标准形式设置ResponseHeaders的Cookie，这里Cookie是一个key-value形式的值，除了session还有其他信息，所以Cookie也经常被称为Cookies，其中的服务器session只是通过Cookie来传递的一个值，所以前端再请求url中带上的应该是这个sessionId。</p>
+<p>​    由于微信并没有给小程序开放保存，设置Cookie的接口，只能手动取出在请求中的Set-Cookie字段，解析出session，在发起请求的时候设置到请求header中。在浏览器中有一套成熟且自动的解析，保存，设置Cookie的机制。不需要开放过程中手动保存Cookie，当然如果浏览器禁用了Cookie,就需要考虑如url带参数的方式来保持用户的状态。</p>
 <h3 id="二-Cookie是什么"><a href="#二-Cookie是什么" class="headerlink" title="二. Cookie是什么"></a>二. Cookie是什么</h3><h6 id="1-Cookie的由来："><a href="#1-Cookie的由来：" class="headerlink" title="1.Cookie的由来："></a>1.Cookie的由来：</h6><p>​    Cookie 技术产生源于 HTTP 协议在互联网上的急速发展。随着互联网的深层次发展，人们需要更复杂的互联网交互活动，比如需要知道哪些人往自己的购物车中放了商品，  也就是说我必须把每个人区分开，记录每个访问者的状态。然而HTTP是一个“无状态”协议，为了在用户访问时知道当前用户的信息，1993 年，网景公司雇员 Lou Montulli 想到了可以把服务器生成的session传给浏览器保存起来，下次访问再带上这个session就可以了，于是发明了Cookie在里面设置和传递服务端session的id。</p>
 <h6 id="2-cookie实现和特点："><a href="#2-cookie实现和特点：" class="headerlink" title="2.cookie实现和特点："></a>2.cookie实现和特点：</h6><p>​    Cookie分发是通过扩展HTTP协议来实现的，服务器通过在HTTP的响应头中加上一行特殊的指示以提示浏览器按照指示生成相应的Cookie。而cookie的使用是由浏览器按照一定的原则在后台自动发送给服务器的。浏览器检查所有存储的Cookie，如果某个Cookie所声明的作用范围大于等于将要请求的资源所在的位置，则把该Cookie附在请求资源的HTTP请求头上发送给服务器。</p>
 <p>​    Cookie的内容主要包括：名字，值，过期时间，路径和域。路径与域一起构成Cookie的作用范围。若不设置过期时间，则表示这个Cookie的生命期为浏览器会话期间，关闭浏览器窗口，Cookie就消失。这种生命期为浏览器会话期的Cookie被称为会话Cookie。会话Cookie一般不存储在硬盘上而是保存在内存里，当然这种行为并不是规范规定的。若设置了过期时间，浏览器就会把Cookie保存到硬盘上，关闭后再次打开浏览器，这些Cookie仍然有效直到超过设定的过期时间。</p>
@@ -190,7 +190,7 @@
 <p>​    当然可以在不需要cookies中的某些值时选择删除：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">for (NSHTTPCookie *cookie in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) &#123;</div><div class="line">    if([cookie.name isEqualToString:@&quot;athena-session&quot;]) &#123;</div><div class="line">        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <pre><code>并且AFNetworking保存Cookie后,通过UIWebView的loadRequest方法load NSURLRequest时可以共用cookie。
-</code></pre><h6 id="2-WKWebview设置Cookie"><a href="#2-WKWebview设置Cookie" class="headerlink" title="2 WKWebview设置Cookie:"></a>2 WKWebview设置Cookie:</h6><p>​    之前提到UIWebView 中loadRequest可以自动使用保存好的 Cookie, 体会到了iOS框架设计者的贴心，然而事情不总是这么完美，iOS 8 后退出的WKWebview并没有这个能力，需要手动添加</p>
+</code></pre><h6 id="2-WKWebview设置Cookie"><a href="#2-WKWebview设置Cookie" class="headerlink" title="2 WKWebview设置Cookie:"></a>2 WKWebview设置Cookie:</h6><p>​    之前提到UIWebView 中loadRequest可以自动使用保存好的 Cookie, 体会到了iOS框架设计者的贴心，然而事情不总是这么完美，iOS 8 后推出的WKWebview并没有这个能力，需要手动添加</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">- (void)loadRequest: (NSMutableURLRequest *)request &#123;</div><div class="line"></div><div class="line">    NSString * sessionId = @&quot;&quot;;</div><div class="line">    for (NSHTTPCookie * cookie in [NSHTTPCookieStorage sharedHTTPCookieStorage].cookies) &#123;</div><div class="line">        if ([cookie.name isEqualToString:@&quot;session&quot;]) &#123;</div><div class="line">            sessionId = cookie.value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    NSString * session = [NSString stringWithFormat:@&quot;%@=%@&quot;,@&quot;session&quot;, sessionId];</div><div class="line"></div><div class="line">    [request addValue: sessionforHTTPHeaderField:@&quot;cookie&quot;];</div><div class="line"></div><div class="line">    [_webView loadRequest: request];</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="四-使用Cookie和Session机制的缺点"><a href="#四-使用Cookie和Session机制的缺点" class="headerlink" title="四. 使用Cookie和Session机制的缺点"></a>四. 使用Cookie和Session机制的缺点</h3>
       
